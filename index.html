@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Passport — Ali-Nel</title>
+<style>
+/* ============ FOUNDATION ============ */
+:root{
+  --navy:#1F3864;
+  --avo:#2E5FA3;
+  --light:#DEEAF6;
+  --gold:#C9A227;
+  --green:#1F6B4F;
+  --red:#8C2F39;
+  --ukblue:#2A4B7C;
+  --grey:#6B7280;
+  --purple:#5B4B8A;
+  --paper:#F4EEDF;
+  --paper-dark:#E8DFC8;
+  --ink:#2B2620;
+  --stamp-red:#A33B3B;
+  --stamp-blue:#2E5FA3;
+  --stamp-green:#1F6B4F;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Georgia','Times New Roman',serif;
+  background:var(--paper);
+  color:var(--ink);
+  line-height:1.65;
+  background-image:
+    radial-gradient(ellipse at 20% 10%, rgba(201,162,39,0.06), transparent 50%),
+    radial-gradient(ellipse at 80% 90%, rgba(46,95,163,0.05), transparent 50%),
+    repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.015) 3px, rgba(0,0,0,0.015) 4px);
+}
+/* paper grain texture */
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:0.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
+}
+::selection{background:var(--gold);color:var(--navy);}
+h1,h2,h3{font-family:'Georgia',serif;color:var(--navy);}
+
+/* ============ COVER ============ */
+.cover{
+  min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:2rem;position:relative;
+  background:
+    radial-gradient(ellipse at center, #2A4B7C 0%, var(--navy) 55%, #16294A 100%);
+  color:#F4EEDF;
+  overflow:hidden;
+}
+.cover::after{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
+  opacity:0.25;
+}
+.cover .emblems{font-size:2.2rem;letter-spacing:0.5rem;margin-bottom:1.5rem;opacity:0.85;}
+.cover h1{
+  font-size:clamp(3rem,9vw,6.5rem);color:var(--gold);letter-spacing:0.12em;
+  text-shadow:0 2px 20px rgba(0,0,0,0.5);
+  text-transform:uppercase;font-weight:700;margin-bottom:0.5rem;
+}
+.cover .subtitle{
+  font-size:clamp(1rem,2.5vw,1.4rem);letter-spacing:0.35em;text-transform:uppercase;
+  color:var(--light);opacity:0.9;margin-bottom:2.5rem;
+}
+.cover .stamp-line{
+  display:flex;gap:0.8rem;justify-content:center;flex-wrap:wrap;margin-bottom:3rem;
+}
+.cover .stamp-line span{
+  border:2px solid rgba(244,238,223,0.5);border-radius:4px;padding:0.3rem 0.8rem;
+  font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--light);
+  transform:rotate(-2deg);opacity:0.85;font-family:'Courier New',monospace;
+}
+.cover .stamp-line span:nth-child(even){transform:rotate(2deg);}
+.cover .open-btn{
+  background:var(--gold);color:var(--navy);border:none;padding:1rem 3rem;
+  font-family:'Georgia',serif;font-size:1.1rem;letter-spacing:0.2em;text-transform:uppercase;
+  cursor:pointer;border-radius:3px;box-shadow:0 4px 20px rgba(0,0,0,0.4);
+  transition:transform 0.2s, box-shadow 0.2s;font-weight:bold;
+}
+.cover .open-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,0,0,0.5);}
+.cover .cover-note{
+  margin-top:3rem;font-size:0.8rem;letter-spacing:0.15em;opacity:0.6;
+  font-family:'Courier New',monospace;text-transform:uppercase;
+}
+
+/* ============ PAGE SHELL ============ */
+.passport{display:none;}
+.passport.open{display:block;}
+.page{
+  max-width:900px;margin:0 auto;padding:4rem 2rem 5rem;
+  border-bottom:1px solid rgba(31,56,100,0.12);
+  position:relative;
+}
+.page:last-child{border-bottom:none;}
+.page-label{
+  font-family:'Courier New',monospace;font-size:0.7rem;letter-spacing:0.25em;
+  text-transform:uppercase;color:var(--avo);margin-bottom:1.5rem;
+  display:flex;align-items:center;gap:0.6rem;
+}
+.page-label::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--avo),transparent);}
+.page h2{
+  font-size:clamp(1.8rem,4vw,2.6rem);margin-bottom:0.8rem;color:var(--navy);
+  line-height:1.2;
+}
+.page .era{
+  font-family:'Courier New',monospace;color:var(--gold);font-size:0.9rem;
+  letter-spacing:0.2em;text-transform:uppercase;margin-bottom:1.5rem;font-weight:bold;
+}
+.page .lede{
+  font-size:1.15rem;color:#4A4A4A;font-style:italic;margin-bottom:1.5rem;
+  border-left:3px solid var(--gold);padding-left:1rem;
+}
+.page p{margin-bottom:1.2rem;color:#3A352E;}
+.page p b{color:var(--navy);}
+.page .voice{font-style:italic;color:var(--red);}
+
+/* ============ THE RAIL ============ */
+.rail{
+  position:fixed;bottom:0;left:0;right:0;z-index:100;
+  background:rgba(31,56,100,0.96);backdrop-filter:blur(4px);
+  border-top:2px solid var(--gold);
+  padding:0.5rem 1rem;display:flex;align-items:center;gap:1.2rem;
+  overflow-x:auto;white-space:nowrap;
+  font-family:'Courier New',monospace;font-size:0.65rem;letter-spacing:0.1em;
+  color:var(--light);
+}
+.rail .layer{display:flex;align-items:center;gap:0.4rem;cursor:pointer;padding:0.2rem 0.4rem;border-radius:3px;transition:background 0.2s;}
+.rail .layer:hover{background:rgba(255,255,255,0.1);}
+.rail .dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.rail .layer .events{opacity:0.75;font-size:0.6rem;}
+
+/* ============ THE STREAM (V5) ============ */
+.stream-bar{
+  position:sticky;top:0;z-index:150;
+  background:rgba(22,41,74,0.97);backdrop-filter:blur(4px);
+  border-bottom:2px solid var(--gold);
+  padding:0.45rem 1rem;display:flex;align-items:center;gap:0.4rem;
+  overflow-x:auto;white-space:nowrap;
+  font-family:'Courier New',monospace;font-size:0.62rem;letter-spacing:0.08em;
+  color:var(--light);
+}
+.stream-bar .sb-label{color:var(--gold);font-weight:bold;margin-right:0.5rem;flex-shrink:0;letter-spacing:0.2em;}
+.stream-seg{
+  padding:0.22rem 0.6rem;border:1px solid rgba(244,238,223,0.25);border-radius:3px;
+  cursor:pointer;flex-shrink:0;transition:all 0.2s;opacity:0.7;line-height:1.2;
+}
+.stream-seg:hover{opacity:1;border-color:var(--gold);}
+.stream-seg.active{background:var(--gold);color:var(--navy);border-color:var(--gold);opacity:1;font-weight:bold;}
+.stream-seg .sy{display:block;font-size:0.52rem;opacity:0.85;letter-spacing:0.12em;}
+.stream-seg.active .sy{opacity:0.9;}
+
+/* where-we-are strip */
+.page-where{
+  display:flex;margin:1.2rem 0 2rem;
+  border:1px solid rgba(31,56,100,0.22);border-radius:6px;overflow:hidden;
+  font-size:0.85rem;line-height:1.5;
+}
+.page-where .w-fam{flex:1;padding:0.8rem 1rem;background:rgba(201,162,39,0.10);border-right:1px dashed rgba(31,56,100,0.25);}
+.page-where .w-eco{flex:1;padding:0.8rem 1rem;background:rgba(46,95,163,0.10);}
+.page-where .w-tag{display:block;font-family:'Courier New',monospace;font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:0.3rem;}
+.w-fam .w-tag{color:var(--gold);}
+.w-eco .w-tag{color:var(--avo);}
+@media(max-width:700px){.page-where{flex-direction:column;}.page-where .w-fam{border-right:none;border-bottom:1px dashed rgba(31,56,100,0.25);}}
+
+/* evidence label */
+.evidence-label{
+  font-family:'Courier New',monospace;font-size:0.62rem;letter-spacing:0.22em;
+  text-transform:uppercase;color:var(--grey);margin:1.8rem 0 -0.6rem;
+  display:flex;align-items:center;gap:0.6rem;
+}
+.evidence-label::after{content:'';flex:1;height:1px;background:rgba(107,114,128,0.3);}
+
+/* ============ STAMPS ============ */
+.stamp-grid{display:flex;flex-wrap:wrap;gap:0.8rem;margin:1.5rem 0;}
+.stamp{
+  position:relative;border:3px double var(--stamp-red);border-radius:6px;
+  padding:0.6rem 1rem;cursor:pointer;transition:transform 0.2s, box-shadow 0.2s;
+  background:rgba(255,255,255,0.35);font-family:'Courier New',monospace;
+  text-transform:uppercase;letter-spacing:0.08em;font-size:0.75rem;
+  color:var(--stamp-red);transform:rotate(-1.5deg);text-align:center;
+  box-shadow:0 1px 4px rgba(0,0,0,0.08);
+}
+.stamp:nth-child(even){transform:rotate(1.5deg);color:var(--stamp-blue);border-color:var(--stamp-blue);}
+.stamp:nth-child(3n){transform:rotate(-0.5deg);color:var(--stamp-green);border-color:var(--stamp-green);}
+.stamp:hover{transform:scale(1.05) rotate(0);box-shadow:0 4px 12px rgba(0,0,0,0.2);}
+.stamp .lang{display:block;font-size:0.6rem;opacity:0.7;letter-spacing:0.2em;margin-top:0.2rem;}
+.stamp .wavy{display:block;font-size:0.65rem;margin-top:0.15rem;opacity:0.6;}
+
+/* stamp modal */
+.modal-backdrop{
+  position:fixed;inset:0;background:rgba(10,16,30,0.75);z-index:200;
+  display:none;align-items:center;justify-content:center;padding:1rem;
+  backdrop-filter:blur(3px);
+}
+.modal-backdrop.show{display:flex;}
+.modal{
+  background:var(--paper);max-width:640px;width:100%;max-height:85vh;overflow-y:auto;
+  border-radius:8px;padding:2rem;position:relative;
+  border:1px solid rgba(31,56,100,0.3);box-shadow:0 20px 60px rgba(0,0,0,0.4);
+  background-image:repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.015) 3px, rgba(0,0,0,0.015) 4px);
+}
+.modal .close{
+  position:absolute;top:0.8rem;right:1rem;background:none;border:none;
+  font-size:1.6rem;cursor:pointer;color:var(--navy);line-height:1;
+}
+.modal h3{font-size:1.5rem;margin-bottom:0.3rem;color:var(--navy);}
+.modal .modal-era{font-family:'Courier New',monospace;font-size:0.7rem;letter-spacing:0.2em;color:var(--gold);text-transform:uppercase;margin-bottom:1rem;}
+.modal .chain{background:rgba(46,95,163,0.08);border-left:3px solid var(--avo);padding:0.8rem 1rem;margin:1rem 0;font-size:0.9rem;}
+.modal .chain b{color:var(--avo);}
+.modal .quote{font-style:italic;color:var(--red);margin:1rem 0;padding:0.5rem 1rem;border-left:3px solid var(--red);}
+.modal p{font-size:0.95rem;margin-bottom:0.8rem;}
+
+/* ============ PHOTOS ============ */
+.photo-frame{
+  margin:2rem 0;position:relative;text-align:center;
+}
+.photo-frame .photo{
+  max-width:100%;max-height:480px;border:10px solid #fff;box-shadow:0 4px 20px rgba(0,0,0,0.25);
+  transform:rotate(-0.8deg);border-radius:2px;
+  filter:sepia(0.15) contrast(1.02);
+}
+.photo-frame .caption{
+  margin-top:0.6rem;font-family:'Courier New',monospace;font-size:0.7rem;
+  letter-spacing:0.12em;color:var(--grey);text-transform:uppercase;
+}
+.photo-frame .polaroid{
+  transform:rotate(1.5deg);border-bottom:40px solid #fff;
+}
+.polaroid .caption{position:absolute;bottom:8px;left:0;right:0;margin:0;color:var(--navy);}
+
+/* ============ DEEP CURRENT ============ */
+.current-wrap{margin:2.5rem 0;position:relative;}
+.current-label{
+  font-family:'Courier New',monospace;font-size:0.7rem;letter-spacing:0.25em;
+  color:var(--purple);text-transform:uppercase;margin-bottom:0.8rem;display:flex;align-items:center;gap:0.6rem;
+}
+.current-label::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--purple),transparent);}
+.current-svg{width:100%;height:120px;display:block;}
+.current-svg .river{fill:none;stroke:var(--purple);stroke-width:4;opacity:0.55;}
+.current-svg .river-deep{fill:none;stroke:var(--purple);stroke-width:9;opacity:0.2;}
+.current-svg .year{fill:var(--grey);font-size:10px;font-family:'Courier New',monospace;}
+.current-svg .marker{fill:var(--gold);}
+.current-note{font-size:0.85rem;color:#5A544A;font-style:italic;margin-top:0.5rem;}
+
+/* ============ PATTERNS ============ */
+.pattern-card{
+  background:rgba(255,255,255,0.45);border:1px solid rgba(31,56,100,0.15);
+  border-radius:8px;padding:1.5rem;margin-bottom:1.2rem;
+  border-left:5px solid var(--gold);transition:transform 0.2s;
+}
+.pattern-card:hover{transform:translateX(4px);}
+.pattern-card h4{color:var(--navy);margin-bottom:0.5rem;font-size:1.15rem;}
+.pattern-card .num{
+  display:inline-block;background:var(--navy);color:var(--light);border-radius:50%;
+  width:1.8rem;height:1.8rem;text-align:center;line-height:1.8rem;margin-right:0.6rem;
+  font-family:'Courier New',monospace;font-size:0.8rem;
+}
+.pattern-card p{font-size:0.95rem;color:#4A433B;}
+
+/* ============ THE MIRROR ============ */
+.mirror-form{background:rgba(255,255,255,0.5);border:1px solid rgba(31,56,100,0.2);border-radius:8px;padding:1.8rem;margin:1.5rem 0;}
+.mirror-form label{display:block;font-family:'Courier New',monospace;font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--avo);margin-bottom:0.3rem;}
+.mirror-form input,.mirror-form textarea{
+  width:100%;padding:0.6rem;margin-bottom:1rem;border:1px solid rgba(31,56,100,0.3);
+  border-radius:4px;font-family:Georgia,serif;font-size:0.95rem;background:rgba(255,255,255,0.7);
+}
+.mirror-form textarea{min-height:70px;}
+.mirror-form .btn{
+  background:var(--navy);color:var(--light);border:none;padding:0.7rem 1.5rem;
+  border-radius:4px;cursor:pointer;font-family:'Courier New',monospace;letter-spacing:0.1em;
+  font-size:0.8rem;text-transform:uppercase;
+}
+.mirror-form .btn:hover{background:var(--avo);}
+
+/* ============ CLOSING ============ */
+.closing{
+  min-height:70vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:4rem 2rem;
+  background:radial-gradient(ellipse at center, #2A4B7C 0%, var(--navy) 60%, #16294A 100%);
+  color:var(--light);
+}
+.closing h2{color:var(--gold);font-size:clamp(2rem,5vw,3.2rem);margin-bottom:1.5rem;}
+.closing .pt{
+  font-size:clamp(1.4rem,3.5vw,2.2rem);color:var(--light);font-style:italic;margin-bottom:0.5rem;
+}
+.closing .pt-en{font-size:0.9rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);opacity:0.9;}
+.closing .amen{margin-top:3rem;font-size:1rem;letter-spacing:0.3em;text-transform:uppercase;opacity:0.7;}
+
+/* ============ RESPONSIVE ============ */
+@media(max-width:700px){
+  .page{padding:3rem 1.2rem 4rem;}
+  .cover h1{font-size:2.6rem;}
+  .rail{font-size:0.55rem;gap:0.8rem;}
+  .photo-frame .photo{max-height:320px;}
+}
+@media print{
+  .rail,.modal-backdrop,.stream-bar{display:none !important;}
+  .page{border:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ COVER ============ -->
+<div class="cover" id="cover">
+  <div class="emblems">✈️ 🛂 ✒️ 🏦</div>
+  <h1>The Passport</h1>
+  <div class="subtitle">A Family's Journey Through the Deep Current</div>
+  <div class="stamp-line">
+    <span>Comores</span><span>Moçambique</span><span>South Africa</span><span>Portugal</span>
+  </div>
+  <button class="open-btn" onclick="openPassport()">Open the Passport</button>
+  <div class="cover-note">Ali-Nel · 1921 – present · an heirloom, not a website</div>
+  <div class="cover-note" style="margin-top:0.5rem;color:var(--gold);letter-spacing:0.2em;">For Ryan &amp; Warren · for Sully</div>
+</div>
+
+<!-- ============ PASSPORT ============ -->
+<div class="passport" id="passport">
+
+  <!-- THE STREAM — always visible -->
+  <div class="stream-bar" id="streamBar">
+    <span class="sb-label">THE STREAM</span>
+    <div class="stream-seg" data-idx="0"><span class="sy">1930s</span>Gold pulls him in</div>
+    <div class="stream-seg" data-idx="1"><span class="sy">1944</span>Bretton Woods</div>
+    <div class="stream-seg" data-idx="2"><span class="sy">1949</span>Sterling crash</div>
+    <div class="stream-seg" data-idx="3"><span class="sy">1955</span>Removals begin</div>
+    <div class="stream-seg" data-idx="4"><span class="sy">1960</span>Sharpeville</div>
+    <div class="stream-seg" data-idx="5"><span class="sy">1964</span>Twin · handover</div>
+    <div class="stream-seg" data-idx="6"><span class="sy">1966/67</span>Deportation</div>
+    <div class="stream-seg" data-idx="7"><span class="sy">1974–75</span>Empire falls</div>
+    <div class="stream-seg" data-idx="8"><span class="sy">1979</span>Ennerdale</div>
+    <div class="stream-seg" data-idx="9"><span class="sy">1990</span>Cape Town</div>
+    <div class="stream-seg" data-idx="10"><span class="sy">2011</span>Laura found</div>
+  </div>
+
+  <!-- PAGE: DEDICATION -->
+  <div class="page">
+    <div class="page-label">A Dedicação · The Dedication</div>
+    <h2>For Ryan &amp; Warren</h2>
+    <div class="era">And for Sully — who needs to know where she comes from</div>
+    <p class="lede">"I have two sons. This is for them, not about them. Every decision I made was to give them a better chance."</p>
+    <p>This is not a story about a family that stayed. It is a story about a father who <b>got out</b> — so that his sons would never have to make that choice. Ryan in Cape Town. Warren in London. A granddaughter named Sully, carrying the name of a brother who is gone.</p>
+    <p>Every decision — the escape from the township, the first house in Ennerdale, the transfer to Cape Town, the career built from nothing — every one of them was <b>for them</b>. This passport is the map of that purpose.</p>
+    <p style="margin-top:2rem;text-align:center;font-size:1.15rem;color:var(--navy);"><b>For Ryan Jared Ali · Warren Ansley Ali · Sully</b></p>
+  </div>
+
+  <!-- PAGE: THE FAMILY LINE -->
+  <div class="page">
+    <div class="page-label">A Linha · The Line</div>
+    <h2>The names that carry the story</h2>
+    <div class="era">Comoros → Mozambique → South Africa → London · the line that ends at Sully</div>
+    <p class="lede">Sully needs to know where she comes from. Here is the line — the names, threaded generation by generation, ending at hers.</p>
+
+    <div style="display:flex;flex-direction:column;gap:1.2rem;margin:2rem 0;">
+      <div style="background:rgba(201,162,39,0.08);border-left:4px solid var(--gold);padding:1rem 1.2rem;border-radius:4px;">
+        <div style="font-family:'Courier New',monospace;font-size:0.65rem;letter-spacing:0.2em;color:var(--gold);text-transform:uppercase;">Generation 1 · Comoros</div>
+        <div style="font-size:1.15rem;font-weight:bold;color:var(--navy);margin-top:0.3rem;">Ali Madimbamba &amp; Amina Adarafina</div>
+        <div style="font-size:0.85rem;color:#5A544A;">The Comoros Islands — the beginning of the line. Their son would cross the sea.</div>
+      </div>
+      <div style="background:rgba(46,95,163,0.08);border-left:4px solid var(--avo);padding:1rem 1.2rem;border-radius:4px;">
+        <div style="font-family:'Courier New',monospace;font-size:0.65rem;letter-spacing:0.2em;color:var(--avo);text-transform:uppercase;">Generation 2 · The Crossing</div>
+        <div style="font-size:1.15rem;font-weight:bold;color:var(--navy);margin-top:0.3rem;">Muskien Muze Ali</div>
+        <div style="font-size:0.85rem;color:#5A544A;">Comoros → Mozambique → Johannesburg. Swept in by gold, deported ≈1966/67, died in exile in Maputo.</div>
+      </div>
+      <div style="background:rgba(31,107,79,0.08);border-left:4px solid var(--green);padding:1rem 1.2rem;border-radius:4px;">
+        <div style="font-family:'Courier New',monospace;font-size:0.65rem;letter-spacing:0.2em;color:var(--green);text-transform:uppercase;">Generation 3 · The Keeper &amp; The Survivors</div>
+        <div style="font-size:1.05rem;font-weight:bold;color:var(--navy);margin-top:0.3rem;">Alice (ALI-NEL) &amp; the children</div>
+        <div style="font-size:0.85rem;color:#5A544A;">Abdul · Unusse · Sully (Sulayman) · Rashid · Philip · Hamede · Aboobaker — and Laura, the true last-born, raised in Maputo. The Nels: white in appearance, classified "coloured". Of them all, only Hamede and Laura are living.</div>
+      </div>
+      <div style="background:rgba(140,47,57,0.08);border-left:4px solid var(--red);padding:1rem 1.2rem;border-radius:4px;">
+        <div style="font-family:'Courier New',monospace;font-size:0.65rem;letter-spacing:0.2em;color:var(--red);text-transform:uppercase;">Generation 4 · The Getting Out</div>
+        <div style="font-size:1.15rem;font-weight:bold;color:var(--navy);margin-top:0.3rem;">Hamede &amp; Ann Elizabeth</div>
+        <div style="font-size:0.85rem;color:#5A544A;">Married at 21. Ennerdale. Cape Town 1990. The father who got out — so his sons would never have to.</div>
+      </div>
+      <div style="background:rgba(91,75,138,0.08);border-left:4px solid var(--purple);padding:1rem 1.2rem;border-radius:4px;">
+        <div style="font-family:'Courier New',monospace;font-size:0.65rem;letter-spacing:0.2em;color:var(--purple);text-transform:uppercase;">Generation 5 · The Sons</div>
+        <div style="font-size:1.15rem;font-weight:bold;color:var(--navy);margin-top:0.3rem;">Ryan Jared Ali · Warren Ansley Ali</div>
+        <div style="font-size:0.85rem;color:#5A544A;">Cape Town · London. "This is for them, not about them." Their lives are their own.</div>
+      </div>
+      <div style="background:rgba(201,162,39,0.15);border:2px solid var(--gold);padding:1.2rem 1.5rem;border-radius:6px;text-align:center;">
+        <div style="font-family:'Courier New',monospace;font-size:0.65rem;letter-spacing:0.25em;color:var(--gold);text-transform:uppercase;">Generation 6 · The Future</div>
+        <div style="font-size:1.6rem;font-weight:bold;color:var(--navy);margin-top:0.4rem;">Sully</div>
+        <div style="font-size:0.85rem;color:#5A544A;margin-top:0.4rem;">Named after Sully (Sulayman) — the name carried forward. This is for her.</div>
+      </div>
+    </div>
+
+    <p style="text-align:center;font-style:italic;color:#5A544A;margin-top:1.5rem;">Six generations. One current. The names continue.</p>
+    <div style="text-align:center;margin-top:2rem;">
+      <a href="story.html" style="display:inline-block;background:var(--gold);color:var(--navy);padding:0.9rem 2.2rem;border-radius:4px;text-decoration:none;font-family:'Courier New',monospace;font-size:0.8rem;letter-spacing:0.2em;text-transform:uppercase;border:2px solid var(--gold);font-weight:bold;">Read the Story · Blog →</a>
+      <a href="family-tree.html" style="display:inline-block;background:var(--navy);color:var(--light);padding:0.9rem 2.2rem;border-radius:4px;text-decoration:none;font-family:'Courier New',monospace;font-size:0.8rem;letter-spacing:0.2em;text-transform:uppercase;border:2px solid var(--gold);margin-left:0.8rem;">Open the Full Family Tree →</a>
+    </div>
+  </div>
+
+  <!-- PAGE: PROLOGUE -->
+  <div class="page">
+    <div class="page-label">Página de Abertura · Prologue</div>
+    <h2>Every family has a passport story</h2>
+    <div class="era">Some are written in ink. Some are written in stamps.</div>
+    <div class="page-where"><div class="w-fam"><span class="w-tag">The family</span>Prologue — the documents</div><div class="w-eco"><span class="w-tag">The economy · the stream</span>The deep current rises</div></div>
+    <p class="lede">This is the story of one family — the Ali-Nel family — who lived their lives inside other people's documents: a freehold title, a rent receipt, a French passport, a passbook, a deportation order.</p>
+    <p>The documents are the frame. But the story is the <b>deep current</b> beneath them — the world economy that pulled a young man from the Comoros to the goldfields of Johannesburg, and then, when the current turned, swept him back out.</p>
+    <p>This is not a unique story. It is a <b>common</b> story — too common to ignore, because it carries the pattern. And the pattern is the lesson.</p>
+    <p class="voice" style="border-left:4px solid var(--gold);padding-left:1rem;">"The artifact is not the thing. The content is the thing. The story is the thing — and the artifacts are the evidence." — Hamede, on how the Passport should read</p>
+    <div class="photo-frame">
+      <img class="photo" src="assets/mothers_passport_identity_page_2026-08-30.jpg" alt="Mother's passport identity page">
+      <div class="caption">The artifact that opened everything — the mother's French passport, ALI-NEL, domicile 142 Good Street</div>
+    </div>
+    <div class="current-wrap">
+      <div class="current-label">The Deep Current — a river beneath the story</div>
+      <svg class="current-svg" viewBox="0 0 800 120" preserveAspectRatio="none">
+        <path class="river-deep" d="M0,70 C100,55 200,85 300,60 C400,35 500,90 600,55 C700,20 750,60 800,45"/>
+        <path class="river" d="M0,60 C100,45 200,75 300,50 C400,25 500,80 600,45 C700,10 750,50 800,35"/>
+        <text class="year" x="120" y="100">1930</text>
+        <text class="year" x="280" y="105">1949</text>
+        <text class="year" x="440" y="100">1966</text>
+        <text class="year" x="600" y="105">1975</text>
+        <text class="year" x="740" y="100">1994</text>
+        <circle class="marker" cx="160" cy="58" r="4"/>
+        <circle class="marker" cx="320" cy="52" r="4"/>
+        <circle class="marker" cx="480" cy="60" r="4"/>
+        <circle class="marker" cx="640" cy="48" r="4"/>
+      </svg>
+      <div class="current-note">The gold standard rises, the pound collapses, the empire goes broke, the oil shocks hit — and the family moves with the current.</div>
+    </div>
+  </div>
+
+  <!-- PAGE: THE FATHER -->
+  <div class="page">
+    <div class="page-label">Página Um · The Pull</div>
+    <h2>The gold that pulled him in</h2>
+    <div class="era">1930s–1940s · Comoros → Mozambique → Johannesburg</div>
+    <div class="page-where"><div class="w-fam"><span class="w-tag">The family</span>The family: a young man arrives in the city of gold</div><div class="w-eco"><span class="w-tag">The economy · the stream</span>The world: gold pulls labour from across southern Africa; empire finances itself on it</div></div>
+    <p class="lede">"Powerful countries started pillaging — and I was right in the middle."</p>
+    <p>His name was <b>Muskien Muze Ali</b>. He came from the Comoros Islands, by way of Mozambique — a young man drawn by the great labour magnet of the early twentieth century: <b>gold</b>. The Wenela recruitment system swept tens of thousands of men from across southern Africa into the Rand's mines.</p>
+    <p>He arrived in Johannesburg in the 1930s–40s, a foreigner in the city of gold. He married <b>Alice Nel</b> — a woman from a family that looked white but was classified "coloured", performing whiteness to keep its privilege — and together they built a life on <b>Good Street, Sophiatown</b>: a freehold house, multicultural neighbours, a family. It was the rare place where a black family could <b>own</b> land.</p>
+    <p class="voice" style="border-left:4px solid var(--gold);padding-left:1rem;">"If you look white you can get privilege — as long as nobody asked proof."</p>
+    <p>But the current was already turning. The world economy that pulled him in would, thirty years later, sweep him out.</p>
+    <div style="background:rgba(201,162,39,0.07);border-left:4px solid var(--gold);padding:1.2rem 1.4rem;border-radius:4px;margin:1.5rem 0;">
+      <div style="font-family:'Courier New',monospace;font-size:0.65rem;letter-spacing:0.2em;color:var(--gold);text-transform:uppercase;margin-bottom:0.6rem;">The deep current in the living room · the Salazar radio</div>
+      <p style="font-size:0.95rem;">"One of the things I remember very clearly was my father's obsession with <b>Salazar</b>. He didn't understand English that well, so whenever the news came up, he would always shout for my mother to come interpret — any developments in Portugal and Mozambique, the change in the political regime. We would joke about it as a family — 'what did they say, what did they say?' — but his anxiety, his watchfulness about what was happening in Portugal, was paramount."</p>
+      <p style="font-size:0.9rem;font-style:italic;color:#5A544A;margin-top:0.6rem;">The man one empire would soon deport was watching the other empire that ruled his homeland — waiting for it to fall. Salazar: dictator of Portugal 1932–68. The colonial wars began in Angola 1961, Mozambique 1964. When Salazar fell, the empire began to die — and in 1975, Mozambique was free.</p>
+    </div>
+    <div class="evidence-label">Dig into the evidence · the artifacts</div>
+    <div class="stamp-grid">
+      <div class="stamp" onclick="openStamp('wenela')">Gold · Wenela<span class="lang">The Pull</span></div>
+      <div class="stamp" onclick="openStamp('freehold')">Freehold<span class="lang">Sophiatown 142 Good St</span></div>
+      <div class="stamp" onclick="openStamp('ww2')">WWII Boom<span class="lang">The Doubling</span></div>
+      <div class="stamp" onclick="openStamp('salazar')">Salazar<span class="lang">O Império · the radio</span></div>
+    </div>
+  </div>
+
+  <!-- PAGE: THE MOTHER -->
+  <div class="page">
+    <div class="page-label">Página Dois · The Keeper</div>
+    <h2>The woman with five languages</h2>
+    <div class="era">5 September 1921 · Somerset East · ALI-NEL · française</div>
+    <div class="page-where"><div class="w-fam"><span class="w-tag">The family</span>The family: a French passport in a South African township</div><div class="w-eco"><span class="w-tag">The economy · the stream</span>The world: the state classifies, the economy hums</div></div>
+    <p class="lede">She spoke five languages — and people loved her. She is the true protagonist of this story.</p>
+    <p>Born <b>5 September 1921</b> in <b>Somerset East</b> (Cape), her name was <b>Alice</b> — Alice Nel — and she carried a French passport: <b>ALI-NEL</b>, nationality <b>FRANÇAISE</b>, a document that would outlive her family's movements by decades.</p>
+    <p>Her family, the Nels, were white in appearance — but apartheid classified them <b>"coloured"</b>. Their bitterness came from that provisional whiteness: "racist wannabes," families performing privilege as long as nobody asked for proof. At the same station, siblings would pass siblings and not greet them — because they were "posers."</p>
+    <p class="voice" style="border-left:4px solid var(--navy);padding-left:1rem;">"That is what apartheid did — it twisted and altered a person's identity."</p>
+    <p>Her domicile on that passport: <b>142 Good Street, Sophiatown</b>. The same street that would become famous as Sophiatown's "Street of Shebeens" — Can Themba's House of Truth, Fatty Phyllis Peterson's 39 Steps. The family lived at the heart of the freehold township the state was determined to destroy.</p>
+    <p>She held the family together through the deportation of her husband, through the removals, through the Westbury years. Five languages. A hero.</p>
+    <div class="photo-frame">
+      <img class="photo" src="assets/mothers_passport_identity_page_2026-08-30.jpg" alt="Passport identity page">
+      <div class="caption">ALI-NEL · Née Nel · Française · b. 5 Sept 1921 · domicile 142 Good Street</div>
+    </div>
+    <div style="display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;">
+      <div class="photo-frame" style="flex:1;min-width:280px;">
+        <img class="photo" src="assets/mothers_passport_signalement_page_2026-08-30.jpg" alt="Passport signalement page">
+        <div class="caption">The children's table — the family, in the state's handwriting</div>
+      </div>
+      <div class="photo-frame" style="flex:1;min-width:280px;">
+        <img class="photo" src="assets/mothers_passport_renewal_page_2026-08-30.jpg" alt="Passport renewal page">
+        <div class="caption">Renewed 7 Apr 1964 · French Consulate, Johannesburg · "AFFAIRES ÉTRANGÈRES / GRATIS"</div>
+      </div>
+    </div>
+    <div class="evidence-label">Dig into the evidence · the artifacts</div>
+    <div class="stamp-grid">
+      <div class="stamp" onclick="openStamp('passport')">PASSEPORT<span class="lang">Français</span></div>
+      <div class="stamp" onclick="openStamp('nels')">The Nels<span class="lang">Classified 'Coloured'</span></div>
+      <div class="stamp" onclick="openStamp('goodstreet')">Good Street<span class="lang">Street of Shebeens</span></div>
+    </div>
+  </div>
+
+  <!-- PAGE: THE DEPORTATION -->
+  <div class="page">
+    <div class="page-label">Página Três · The Stamp</div>
+    <h2>The deportation — ~1966/67</h2>
+    <div class="era">1964 · the twin, the handover · ~1966/67 · the stamp</div>
+    <div class="page-where"><div class="w-fam"><span class="w-tag">The family</span>The family: the father is stamped out — deported to Mozambique</div><div class="w-eco"><span class="w-tag">The economy · the stream</span>The world: decolonisation hinge; the empire goes broke</div></div>
+    <p class="lede">He was arrested as an "illegal immigrant" and deported to Mozambique — leaving his wife and children behind.</p>
+    <p>The gold economy had pulled him in. Now the machinery of empire's paperwork — the pass laws, the "foreign native" status — threw him out. He was still in South Africa when Laura was born in <b>January 1964</b>; soon after, ≈<b>1966/67</b>, <b>Muskien Muze Ali</b> was arrested and deported. Hamede, born 1958, was eight or nine — "the best I could do" in his 2013 notes. He never returned. He died in exile, in Maputo.</p>
+    <p>His wife stayed. His children stayed. The state kept building around them.</p>
+    <div class="evidence-label">Dig into the evidence · the artifacts</div>
+    <div class="stamp-grid">
+      <div class="stamp" onclick="openStamp('deportation')">DEPORTED<span class="lang">1966/67</span></div>
+      <div class="stamp" onclick="openStamp('passlaws')">Pass Laws<span class="lang">Die Paswette</span></div>
+      <div class="stamp" onclick="openStamp('sharpeville')">Sharpeville<span class="lang">1960 · Die Skerpville</span></div>
+    </div>
+  </div>
+
+  <!-- PAGE: THE REMOVALS -->
+  <div class="page">
+    <div class="page-label">Página Quatro · The Map</div>
+    <h2>They didn't move the family. They moved the map.</h2>
+    <div class="era">1955–1974 · Western Native Township → Westbury</div>
+    <div class="page-where"><div class="w-fam"><span class="w-tag">The family</span>The family: they never move — the map moves around them</div><div class="w-eco"><span class="w-tag">The economy · the stream</span>The world: Group Areas redraws the ground; the economy builds around it</div></div>
+    <p class="lede">"We were in it — they built new flats and houses while we were still there in sections — we literally stayed 1 km from historic Kanyile Street in a flat on the 3rd floor."</p>
+    <p>The family moved from freehold Sophiatown to the municipal rental of <b>616 Kanyile Street, Western Native Township</b> — R5.00 a month. When the state cleared the Western Areas (1955–1968), <b>22,500+ families</b> were trucked to Meadowlands. But this family <b>stayed</b>.</p>
+    <p>The state cleared "in sections" — and their section survived. In ~1974, they moved into the new <b>Westbury Flats</b>, a kilometre from Kanyile Street, on the third floor. And here's the irony: <b>Westbury IS Western Native Township</b> — the ground re-zoned for Coloured residents under Group Areas, renamed in 1973.</p>
+    <p><b>The family never left the ground. The state renamed the ground around them.</b></p>
+    <div class="evidence-label">Dig into the evidence · the artifacts</div>
+    <div class="stamp-grid">
+      <div class="stamp" onclick="openStamp('resettlement')">Resettlement Act<span class="lang">Act No. 19 of 1954</span></div>
+      <div class="stamp" onclick="openStamp('meadowlands')">Meadowlands<span class="lang">10 Feb 1955</span></div>
+      <div class="stamp" onclick="openStamp('westbury')">Westbury<span class="lang">The Renaming</span></div>
+    </div>
+  </div>
+
+  <!-- PAGE: THE VIOLENCE -->
+  <div class="page">
+    <div class="page-label">Página Cinco · The In-Between</div>
+    <h2>Weekend funerals</h2>
+    <div class="era">The texture of the in-between</div>
+    <div class="page-where"><div class="w-fam"><span class="w-tag">The family</span>The family: weekend funerals, the crew, Georgie and Phillip</div><div class="w-eco"><span class="w-tag">The economy · the stream</span>The world: the violence of the in-between — a rhythm, not an event</div></div>
+    <p class="lede voice">"The in-between are the violence put behind us. Friends that died. Weekend funerals were regarded as entertainment and free food. A place that sucks the life out of you and desensitizes you against immoral behaviour — best left where it is now."</p>
+    <p>The violence is not the story. It is the <b>texture</b> of the era — the background against which a boy grew up and decided: <b>I will not be desensitized. I will get out.</b></p>
+    <p>The bangalalas — the Civic Guards, "those who do not sleep" — had fought the "Russians" gang in the 1950s. By the 1970s, the violence had its own rhythm: weekend funerals as entertainment. Hamede's friends — Mike, Charlotte — died violently. "Too many."</p>
+    <p>But two came through it. <b>Georgie Jones</b> — the neighbour from 616 Kanyile Street, friend from the beginning, still alive, still in contact: "We've been through the trenches together. We had the same friends. We lost the same friends." Hamede once watched Georgie get stabbed in front of him — rushed to hospital, he survived. And <b>Phillip Winnaar</b> — his <i>best man</i>, part of the crew, who went to jail for various things, came out, and <i>also</i> became a Jehovah's Witness. A letter Hamede wrote from Ennerdale, forgotten, changed his life. Phillip died three or four years ago. "Those are the two only people I think is worth mentioning... we made some significant changes in their lives as well."</p>
+    <div style="background:rgba(31,107,79,0.06);border-left:4px solid var(--green);padding:1.2rem 1.4rem;border-radius:4px;margin:1.5rem 0;">
+      <div style="font-family:'Courier New',monospace;font-size:0.65rem;letter-spacing:0.2em;color:var(--green);text-transform:uppercase;margin-bottom:0.6rem;">The voice note · the crew · primary source</div>
+      <audio controls preload="none" style="width:100%;margin-bottom:0.8rem;">
+        <source src="assets/hamede_voice_note_salazar_georgie_philip_2026-08-31.ogg" type="audio/ogg">
+        Your browser does not support audio.
+      </audio>
+      <p style="font-size:0.9rem;font-style:italic;color:#5A544A;">"My father's obsession with Salazar... he would always shout for my mother to come interpret... 'what did they say, what did they say?' — but his anxiety, his watchfulness, was paramount. My neighbour in 616 Kanyile Street was Georgie Jones... It would be a grave error to mention my past without mentioning Georgie. And one friend we had in common — Phillip Winnaar... we made some significant changes in their lives as well."</p>
+    </div>
+    <p><b>He got out. That is the whole point.</b></p>
+    <div class="evidence-label">Dig into the evidence · the artifacts</div>
+    <div class="stamp-grid">
+      <div class="stamp" onclick="openStamp('bangalalas')">Bangalalas<span class="lang">Those Who Do Not Sleep</span></div>
+      <div class="stamp" onclick="openStamp('verwoerd')">Verwoerd<span class="lang">"More sinned against"</span></div>
+      <div class="stamp" onclick="openStamp('georgie')">Georgie Jones<span class="lang">616 Kanyile St · the friend</span></div>
+      <div class="stamp" onclick="openStamp('philip')">Phillip Winnaar<span class="lang">Best man · the JW</span></div>
+    </div>
+  </div>
+
+  <!-- PAGE: THE TRIBUTE -->
+  <div class="page">
+    <div class="page-label">A Homenagem · The Tribute</div>
+    <h2>Phillip Winnaar — "What is your business here, Elijah?"</h2>
+    <div class="era">Best man · the letter · jail → Jehovah's Witness · Awake! 2011</div>
+    <div class="page-where"><div class="w-fam"><span class="w-tag">The family</span>The family: the best man, the letter, the transformation</div><div class="w-eco"><span class="w-tag">The economy · the stream</span>The world: a life once defined by the street, retold by the faith</div></div>
+    <p class="lede">Hamede was asked to say a few words at Phillip's funeral. This is what he said.</p>
+    <p>"We grew up together, in a neighborhood renowned for its violent gangs and dangerous lifestyle. We became friends because of our mutual love for music and soccer. We were two friends in a social group reveling in this musical 70's and 80's motown music."</p>
+    <p class="voice" style="font-size:1.1rem;text-align:center;margin:1.5rem 0;">"When I got married — with Phillip as my best man and best friend."</p>
+    <p>Things turned bad. Several of their friends died violent deaths. Phillip ended up in jail. Hamede left the neighbourhood in search of peace and security — and in Ennerdale he found it: "this is where I got the truth."</p>
+    <p>From Ennerdale, Hamede wrote Phillip a letter about the new find and excitement — "I shared with him the joy and purpose I found and forgot about it." Years later, Phillip told him: <b>"That letter you wrote me made a big impact in my life."</b></p>
+    <p>Phillip studied, transformed himself, and served Jehovah. He told Hamede how difficult it was to throw away the arms he had used to keep himself safe — "but it was his trust and love for Jehovah that empowered him." They preached together in Klipspruit, and Hamede saw the respect Phillip received from former gangsters who knew what he had been and what he had become.</p>
+    <div style="background:rgba(31,107,79,0.06);border-left:4px solid var(--green);padding:1.2rem 1.4rem;border-radius:4px;margin:1.5rem 0;">
+      <div style="font-family:'Courier New',monospace;font-size:0.65rem;letter-spacing:0.2em;color:var(--green);text-transform:uppercase;margin-bottom:0.6rem;">The Elijah mantra · 1 Kings 19:9,10</div>
+      <p style="font-size:0.95rem;">"His favorite biblical account of Elijah became our shared mantra, reminding us to persevere in our faith despite opposition — and emblematic of his life. At Horeb, Jehovah asked: 'What is your business here, Elijah?' Elijah felt his work had been in vain — <b>for Phillip, his life was never in vain</b>. Elijah felt alone — <b>for Phillip, he was never alone</b>. Elijah was scared — <b>for Phillip, he was never scared of defending truth and principle.</b>"</p>
+    </div>
+    <p>Phillip's own story appeared in <b>Awake! (July 2011, p. 25)</b>: "Philip was a gangster in South Africa. He spent time in jail for his crimes. But despite his lifestyle, Philip longed to know God... Jehovah saw something good in me and drew me to his people, this wonderful brotherhood."</p>
+    <p style="text-align:center;font-size:1.15rem;color:var(--navy);margin:2rem 0;"><b>"I am praying and hoping that the next time we meet... he will once again greet me: 'What is your business here?'"</b></p>
+    <div class="photo-frame">
+      <img class="photo" src="assets/phillip_eulogy_image1.jpg" alt="Phillip Winnaar — from the eulogy">
+      <div class="caption">Phillip — best man, brother, beacon of light</div>
+    </div>
+    <div class="evidence-label">Dig into the evidence · the artifacts</div>
+    <div class="stamp-grid">
+      <div class="stamp" onclick="openStamp('philip')">The Letter<span class="lang">Forgotten · life-changing</span></div>
+      <div class="stamp" onclick="openStamp('awake')">Awake! 2011<span class="lang">July · p. 25</span></div>
+    </div>
+  </div>
+
+  <!-- PAGE: THE BROTHERS -->
+  <div class="page">
+    <div class="page-label">Página Seis · The Stranded</div>
+    <h2>The brothers the empire held</h2>
+    <div class="era">Mozambique · 24 de Julho · Maputo</div>
+    <div class="page-where"><div class="w-fam"><span class="w-tag">The family</span>The family: brothers locked in Maputo by the deportation</div><div class="w-eco"><span class="w-tag">The economy · the stream</span>The world: Portugal's empire collapses — freedom by bankruptcy</div></div>
+    <p class="lede">Two brothers were locked in Mozambique by the deportation's aftermath — freed only when Portugal's empire collapsed.</p>
+    <p><b>Abdul</b>, the eldest, and <b>Younnis</b> were with Aunt <b>Abiba</b> in Maputo. The deportation of their father trapped them there. They could not return to South Africa — the same machinery that expelled the father barred the sons.</p>
+    <p>They were freed by economics: Britain could no longer finance colonialism; Portugal's empire collapsed in 1974–75. The <b>Carnation Revolution</b> — a revolution of flowers — ended the colonial war and opened the borders. Abdul and Younnis were free.</p>
+    <p>But their father had died in exile before he could see it.</p>
+    <div class="photo-frame">
+      <img class="photo" src="assets/family_tree_2013_page_mafalala_father_laura_abiba.jpg" alt="The 2013 family tree page — Mafalala, father with Laura, Abiba">
+      <div class="caption">From the 2013 family tree — the father photographed with little Laura in Maputo · Mafalala, home of Chissano and Eusébio</div>
+    </div>
+    <div class="evidence-label">Dig into the evidence · the artifacts</div>
+    <div class="stamp-grid">
+      <div class="stamp" onclick="openStamp('carnation')">Carnation Revolution<span class="lang">25 Abril 1974</span></div>
+      <div class="stamp" onclick="openStamp('bretton')">Bretton Woods<span class="lang">Bancor Rejected 1944</span></div>
+      <div class="stamp" onclick="openStamp('sterling')">Sterling Crash<span class="lang">1949 · The Pound</span></div>
+    </div>
+  </div>
+
+  <!-- PAGE: THE ESCAPE -->
+  <div class="page">
+    <div class="page-label">Página Sete · The Getting Out</div>
+    <h2>Ennerdale, then Cape Town</h2>
+    <div class="era">~1979 · married at 21 · first house · 1990 · Mobil</div>
+    <div class="page-where"><div class="w-fam"><span class="w-tag">The family</span>The family: Ennerdale, then Cape Town 1990</div><div class="w-eco"><span class="w-tag">The economy · the stream</span>The world: the year Mandela walks free</div></div>
+    <p class="lede">"I had to get out fast."</p>
+    <p>Married at 21, Hamede moved to <b>Ennerdale</b>, ~45 km from the township, and bought his <b>first house</b>. The story of that house is bittersweet — it involved his brother Rashid, a near-blows fight, and their mother's intervention. "It wasn't a clean movie."</p>
+    <p>In <b>1990</b>, he transferred to Cape Town at his own request — working for <b>Mobil Oil</b>. The year Mandela walked free, Hamede walked out of Johannesburg for good.</p>
+    <div style="background:rgba(140,47,57,0.06);border-left:4px solid var(--red);padding:1.2rem 1.4rem;border-radius:4px;margin:1.5rem 0;">
+      <div style="font-family:'Courier New',monospace;font-size:0.65rem;letter-spacing:0.2em;color:var(--red);text-transform:uppercase;margin-bottom:0.6rem;">The voice note · primary source</div>
+      <audio controls preload="none" style="width:100%;margin-bottom:0.8rem;">
+        <source src="assets/hamede_voice_note_first_house_ennerdale_2026-08-30.ogg" type="audio/ogg">
+        Your browser does not support audio.
+      </audio>
+      <p style="font-size:0.9rem;font-style:italic;color:#5A544A;">"Getting my first house in Ennerdale was bittersweet. It wasn't a clean movie... My mum had to intervene because we were almost at blows with each other. But a year later I got my opportunity after pulling some strings, and I could buy my own place... I came to Cape Town with a sizable amount of money in my bank account."</p>
+    </div>
+    <div class="evidence-label">Dig into the evidence · the artifacts</div>
+    <div class="stamp-grid">
+      <div class="stamp" onclick="openStamp('ennerdale')">Ennerdale<span class="lang">The First House</span></div>
+      <div class="stamp" onclick="openStamp('rashid')">Rashid<span class="lang">The Systems Analyst</span></div>
+      <div class="stamp" onclick="openStamp('mobil')">Mobil<span class="lang">Cape Town 1990</span></div>
+    </div>
+    <div class="photo-frame">
+      <img class="photo" src="assets/hamedes_wedding_2026-08-30.jpg" alt="Hamede and Ann Elizabeth's wedding">
+      <div class="caption">Married at 21 — the mother on the far right, the beginning of the getting out</div>
+    </div>
+    <div class="photo-frame">
+      <img class="photo" src="assets/hamedes_wedding_party_2026-08-30.jpg" alt="Wedding party">
+      <div class="caption">Rashid far left · Hamede far right · Aboobaker kneeling with Rashid's son · third from the left, with the biggest afro: the best man — Phillip Winnaar</div>
+    </div>
+  </div>
+
+  <!-- PAGE: THE FOUND SISTER -->
+  <div class="page">
+    <div class="page-label">Página Oito · The Finding</div>
+    <h2>"Thanks for finding me, Mano — amo te."</h2>
+    <div class="era">~2011 · Maputo · Portugal · the sister he never knew</div>
+    <div class="page-where"><div class="w-fam"><span class="w-tag">The family</span>The family: the sister found, the secret revealed</div><div class="w-eco"><span class="w-tag">The economy · the stream</span>The world: the secret travelled with her to Portugal</div></div>
+    <p class="lede">The true last-born — a surviving twin, given to Aunt Abiba, raised in Maputo, never told she had a family in South Africa.</p>
+    <p>On his first visit to his eldest brother Abdul in Maputo, Abdul took Hamede to Aunt Abiba. She showed him a photograph of a little girl — <b>"exactly like my mother, green eyes, white amongst all the black faces in Maputo."</b></p>
+    <p>That girl was <b>Laura</b>, born <b>9 January 1964</b> — the family's true last-born, a surviving twin. Her twin brother <b>Faizel</b> died at seven months, of meningitis. The mother — grieving, poor, with an unreliable husband — let the baby go when Abiba visited Johannesburg after Faizel's death. <b>The handover happened "without us knowing, only the adults."</b> The children did not know the baby who left with Aunt Abiba was their sister. Laura was raised in Maputo as Abiba's own child, never told she had a family in South Africa.</p>
+    <p>The father knew her — he is photographed with little Laura in Maputo — but <b>she never knew the man was her father</b>. By the time Hamede found her, she had left Maputo with her ex-husband, for Portugal. The secret travelled with her across the sea.</p>
+    <p>When the pieces came together, Laura's response was not anger, not grief — it was gratitude and love:</p>
+    <p class="voice" style="font-size:1.3rem;text-align:center;margin:1.5rem 0;">"Thanks for finding me, Mano — amo te."</p>
+    <div class="photo-frame">
+      <img class="photo polaroid" src="assets/laura_facebook_post_2026-08-30.jpg" alt="Laura as an adult, embracing Hamede">
+      <div class="caption">Laura, grown — "even with the age difference she resembles my mom"</div>
+    </div>
+    <div class="evidence-label">Dig into the evidence · the artifacts</div>
+    <div class="stamp-grid">
+      <div class="stamp" onclick="openStamp('laura')">Laura<span class="lang">9 Jan 1964 · A Sobrevivente</span></div>
+      <div class="stamp" onclick="openStamp('faizel')">Faizel<span class="lang">O Gémeo · d. 1964</span></div>
+      <div class="stamp" onclick="openStamp('abiba')">Abiba<span class="lang">A Tia que Criou</span></div>
+    </div>
+  </div>
+
+  <!-- PAGE: THE PATTERNS -->
+  <div class="page">
+    <div class="page-label">As Padrões · The Patterns</div>
+    <h2>Not unique. Too common to ignore.</h2>
+    <div class="era">The lesson in the pattern</div>
+    <div class="page-where"><div class="w-fam"><span class="w-tag">The family</span>The family: the specimen slide</div><div class="w-eco"><span class="w-tag">The economy · the stream</span>The world: the pattern is the lens</div></div>
+    <p class="lede">"My story is not unique — but too common to ignore the patterns."</p>
+    <div class="pattern-card">
+      <h4><span class="num">1</span>Labour is pulled by economic gravity</h4>
+      <p>Gold money pulled the father in — Wenela, the Rand, the great labour magnet. People follow the current before they ever see it.</p>
+    </div>
+    <div class="pattern-card">
+      <h4><span class="num">2</span>Empire's paperwork decides who belongs</h4>
+      <p>Pass laws, "illegal immigrant," a French passport earned by marriage, a deportation order. Belonging is written — and can be un-written.</p>
+    </div>
+    <div class="pattern-card">
+      <h4><span class="num">3</span>Identity itself is the first casualty</h4>
+      <p>The Nels looked white but were classified "coloured" — "racist wannabes" performing privilege. Siblings at the same station would not greet each other. "That is what apartheid did — it twisted and altered a person's identity."</p>
+    </div>
+    <div class="pattern-card">
+      <h4><span class="num">4</span>States redraw the map around people who stay still</h4>
+      <p>W.N.T. → Westbury. The family never moved; the map moved. Freehold → rental → flats, all on the same ground.</p>
+    </div>
+    <div class="pattern-card">
+      <h4><span class="num">5</span>Empire's collapse frees some, strands others</h4>
+      <p>Portugal went broke → the brothers were freed (1975). The father died in exile from the same machinery. The same current that frees one strand another.</p>
+    </div>
+    <div class="pattern-card">
+      <h4><span class="num">6</span>Violence becomes the texture of the in-between</h4>
+      <p>Weekend funerals as entertainment. Desensitization is the goal — and the danger. A place that sucks the life out of you.</p>
+    </div>
+    <div class="pattern-card">
+      <h4><span class="num">7</span>The ones who get out carry the memory</h4>
+      <p>Hamede and Laura — the living line. Memory is what the survivors carry, and memory is what becomes the book.</p>
+    </div>
+    <div class="pattern-card">
+      <h4><span class="num">8</span>The one who reads the pattern early survives it</h4>
+      <p>Hamede got out before the violence took him. The father couldn't read the forces — he was swept. The lesson: read the current before it reads you.</p>
+    </div>
+  </div>
+
+  <!-- PAGE: THE BRIDGE -->
+  <div class="page">
+    <div class="page-label">A Ponte · The Bridge</div>
+    <h2>The father was the displaced worker of his era</h2>
+    <div class="era">The memoir and "Reskilling for the AI Economy" are the same book</div>
+    <div class="page-where"><div class="w-fam"><span class="w-tag">The family</span>The family: the displaced worker of his era</div><div class="w-eco"><span class="w-tag">The economy · the stream</span>The world: the AI economy sweeps the next generation</div></div>
+    <p class="lede">There was no reskilling for the father. The gold-and-empire order collapsed and he was swept out — a displaced worker of an economy he couldn't read.</p>
+    <p>His son spent a career teaching people to see the <b>next</b> transformation coming. The AI economy is now sweeping a generation the way gold-and-empire swept the father — and the ones who will survive are the ones who <b>learn to read the forces before the forces read them</b>.</p>
+    <p>This memoir is not nostalgia. It is a <b>pattern manual</b>. The past is the lens; the future is the lesson.</p>
+  </div>
+
+  <!-- PAGE: THE MIRROR -->
+  <div class="page">
+    <div class="page-label">O Espelho · The Mirror</div>
+    <h2>Where were your people?</h2>
+    <div class="era">Map your own family onto the pattern</div>
+    <div class="page-where"><div class="w-fam"><span class="w-tag">The family</span>The family: your own</div><div class="w-eco"><span class="w-tag">The economy · the stream</span>The world: map your family onto the pattern</div></div>
+    <p class="lede">This story is a specimen slide. The pattern is the lens. Your family is the discovery.</p>
+    <div class="mirror-form">
+      <label>Your family name</label>
+      <input type="text" id="mirror-name" placeholder="e.g. Ali-Nel">
+      <label>Where were they in 1949? (the sterling crash year)</label>
+      <textarea id="mirror-1949" placeholder="What were they doing when the pound collapsed?"></textarea>
+      <label>Where were they in 1966/67? (the deportation hinge)</label>
+      <textarea id="mirror-1959" placeholder="What was happening to them when the father was stamped out?"></textarea>
+      <label>Where were they in 1975? (the empire's collapse)</label>
+      <textarea id="mirror-1975" placeholder="Were they freed, stranded, or watching?"></textarea>
+      <label>Where were they in 1994? (the ballot)</label>
+      <textarea id="mirror-1994" placeholder="Did they vote? Witness? Watch the snaking lines on TV?"></textarea>
+      <label>Who got out — and how?</label>
+      <textarea id="mirror-out" placeholder="The one who read the pattern early..."></textarea>
+      <button class="btn" onclick="saveMirror()">Save my family's pattern</button>
+    </div>
+  </div>
+
+  <!-- PAGE: CLOSING -->
+  <div class="closing">
+    <h2>Mano — amo te</h2>
+    <p class="pt">"Obrigado por me encontrar, Mano — amo te."</p>
+    <p class="pt-en">Thanks for finding me, brother — I love you.</p>
+    <p style="margin-top:2rem;max-width:600px;opacity:0.85;">The mother who spoke five languages gave her son the one thing the state never could: the words to find his family. A man relearning his mother tongue — because his mother, his hero, taught him that language is the deepest current of all.</p>
+    <div class="amen">Amém · Até amanhã, amigo meu</div>
+  </div>
+
+</div>
+
+<!-- ============ STAMP MODAL ============ -->
+<div class="modal-backdrop" id="modalBackdrop" onclick="closeModal(event)">
+  <div class="modal" id="modalContent"></div>
+</div>
+
+<!-- ============ RAIL ============ -->
+<div class="rail">
+  <span style="color:var(--gold);font-weight:bold;">THE STORY</span>
+  <div class="layer" onclick="jumpTo('dedication')"><span class="dot" style="background:var(--gold)"></span> DEDICATION</div>
+  <div class="layer" onclick="jumpTo('prologue')"><span class="dot" style="background:var(--gold)"></span> PROLOGUE</div>
+  <div class="layer" onclick="jumpTo('pull')"><span class="dot" style="background:var(--green)"></span> 1 · THE PULL</div>
+  <div class="layer" onclick="jumpTo('keeper')"><span class="dot" style="background:var(--green)"></span> 2 · THE KEEPER</div>
+  <div class="layer" onclick="jumpTo('stamp')"><span class="dot" style="background:var(--red)"></span> 3 · THE STAMP</div>
+  <div class="layer" onclick="jumpTo('map')"><span class="dot" style="background:var(--red)"></span> 4 · THE MAP</div>
+  <div class="layer" onclick="jumpTo('inbetween')"><span class="dot" style="background:var(--grey)"></span> 5 · THE IN-BETWEEN</div>
+  <div class="layer" onclick="jumpTo('tribute')"><span class="dot" style="background:var(--green)"></span> · THE TRIBUTE</div>
+  <div class="layer" onclick="jumpTo('stranded')"><span class="dot" style="background:var(--red)"></span> 6 · THE STRANDED</div>
+  <div class="layer" onclick="jumpTo('out')"><span class="dot" style="background:var(--green)"></span> 7 · THE GETTING OUT</div>
+  <div class="layer" onclick="jumpTo('finding')"><span class="dot" style="background:var(--gold)"></span> 8 · THE FINDING</div>
+  <div class="layer" onclick="jumpTo('patterns')"><span class="dot" style="background:var(--purple)"></span> THE PATTERNS</div>
+  <div class="layer" onclick="jumpTo('bridge')"><span class="dot" style="background:var(--purple)"></span> THE BRIDGE</div>
+  <div class="layer" onclick="jumpTo('mirror')"><span class="dot" style="background:var(--purple)"></span> THE MIRROR</div>
+</div>
+
+<script>
+/* ============ DATA: THE STAMPS ============ */
+const STAMPS = {
+  wenela: {
+    title: "The Pull of Gold",
+    era: "1930s–1940s · The Rand",
+    body: "The Witwatersrand gold mines were the greatest labour magnet of the early 20th century. The Wenela (Witwatersrand Native Labour Association) recruited men from across southern Africa — Mozambique included — into the mines. The Comoros Islands, French territory, were part of a wider Indian Ocean labour economy.",
+    chain: "REGIONAL → GLOBAL: Mozambique's labour → the Rand's gold → the gold standard → the British Empire's financial system. The father was not an immigrant; he was a unit of labour in a global machine.",
+    quote: "\"Powerful countries started pillaging — and I was right in the middle.\" — Hamede"
+  },
+  freehold: {
+    title: "Freehold — The Thing the State Hated",
+    era: "Sophiatown · 142 Good Street",
+    body: "Sophiatown was freehold land — one of the few places in South Africa where black people could legally own property. When the state declared Johannesburg a 'white' area in 1933, ~43,000 Africans became 'illegals' and were steered into municipal locations. About 17,000 spurned the plan and flooded Sophiatown, Newclare and Martindale freehold instead. The Ali-Nel family was among those who owned.",
+    chain: "REGIONAL → GLOBAL: freehold = economic independence = a threat to the labour system. The state's answer was the Group Areas Act and the removals.",
+    quote: "The family owned at 142 Good Street — the 'Street of Shebeens' — Can Themba's House of Truth, Fatty Phyllis Peterson's 39 Steps."
+  },
+  ww2: {
+    title: "WWII Doubles the Western Areas",
+    era: "1940s",
+    body: "The labour demands of World War II more than doubled the population of the Western Areas, including W.N.T. Because the municipal location tightly controlled its residents — banning informal beer brewing — many families chose to live as subtenants in the backyards of neighbouring freehold areas.",
+    chain: "GLOBAL → REGIONAL: the war economy → labour demand → urban growth → the 'slum' the apartheid state would clear."
+  },
+  salazar: {
+    title: "Salazar — O Império · The Radio",
+    era: "1932–1968 · Estado Novo · the living room",
+    body: "The father's obsession with Salazar: he didn't understand English well, so whenever the news came up he would shout for his wife to come interpret — any developments in Portugal and Mozambique, the change in the political regime. The family joked about it — 'what did they say, what did they say?' — but his anxiety was paramount. António de Oliveira Salazar was dictator of Portugal 1932–68; the colonial wars began in Angola 1961 and Mozambique 1964; he suffered a stroke in Sept 1968, and the Carnation Revolution (1974) ended the empire.",
+    chain: "THE DEEP CURRENT, AUDIBLE: a man one empire would soon deport, watching the empire that ruled his homeland — waiting for it to fall. Portugal's collapse = Mozambique's freedom = his family's freedom. Radio news as the family's window on empire.",
+    quote: "\"What did they say, what did they say?\" — the family joke that hid the watching."
+  },
+  passport: {
+    title: "PASSEPORT — RÉPUBLIQUE FRANÇAISE",
+    era: "ALI-NEL · française · 5 Sept 1921",
+    body: "The mother's French passport — nationality FRANÇAISE, domicile 142 Good Street, document no. -62/58, issued 13 Nov 1958 Johannesburg, renewed 7 Apr 1964 to 6 Apr 1967 at the French Consulate, JHB (Y. Balcou, Vice Consul), stamped 'AFFAIRES ÉTRANGÈRES / GRATIS'.",
+    chain: "The passport carried the children's table — the names and dates of the family: Abdul, Sullymanl (15 Oct 1949), Aboul Razak (7 Apr 1951), Younnis, Rachid (1 Dec 1954), Hamadi (17 Mar 1958 — Hamede), Aboobaker (17 Jul 1960).",
+    quote: "The artifact that opened the whole story — a woman's French passport in a South African township."
+  },
+  goodstreet: {
+    title: "Good Street — Street of Shebeens",
+    era: "Sophiatown · the heart of the freehold",
+    body: "Good Street was Sophiatown's famous 'Street of Shebeens'. Can Themba's 'House of Truth' stood there, as did Fatty Phyllis Peterson's '39 Steps'. The shebeens were economic survival strategies for women and the centre of the suburb's legendary nightlife, jazz and political discourse.",
+    chain: "SOCIAL → POLITICAL: the shebeen = the place where politics, music and money met — the culture the state called a 'slum'."
+  },
+  deportation: {
+    title: "DEPORTED — 'Illegal Immigrant'",
+    era: "≈1966/67 · after Laura's birth · the hinge of decolonisation",
+    body: "Muskien Muze Ali was arrested as an illegal immigrant and deported to Mozambique. He was still in South Africa when Laura was born in January 1964; the deportation came soon after — ≈1966/67. Hamede, born 1958, was eight or nine ('my 2013 notes I was about 8-10 years is the best I could do'). The man who had been a lawful freehold owner in Sophiatown was, to the state, a 'foreign native' — deportable. He never returned; he died in exile in Maputo.",
+    chain: "REGIONAL → GLOBAL: the pass laws, the 'foreign native' category, and the wider decolonisation hinge — the mid-1960s: Verwoerd assassinated 1966, Rhodesia's UDI, Portugal's colonial wars draining its treasury. The 2013 document's '1959/60' date is now revised by Hamede.",
+    quote: "The father was simultaneously a lawful freehold owner AND a deportable 'illegal' — the system's two papers, in one man."
+  },
+  passlaws: {
+    title: "Die Paswette — The Pass Laws",
+    era: "The paperwork of belonging",
+    body: "Under the Natives (Urban Areas) Act 1923 and later pass laws, black South Africans had to carry documents proving they were legally permitted to be in 'white' areas. A 'foreign native' — a black person not born in South Africa — was especially vulnerable. The father was precisely that: a Comorian-born man, married to a woman with a French passport, living in a freehold house on Good Street.",
+    chain: "SOCIAL → POLITICAL → GLOBAL: the passbook was the state's way of making labour portable but people not. The same logic that deported the father."
+  },
+  sharpeville: {
+    title: "Sharpeville · 21 March 1960",
+    era: "The hinge of the pass laws",
+    body: "On 21 March 1960, police fired on a crowd of pass-law protesters at Sharpeville, killing 69 people. The massacre marked a turning point — the pass laws' brutality became world news; the ANC was banned; Sharpeville became a hinge of South African history.",
+    chain: "REGIONAL → GLOBAL: Sharpeville shook investor confidence, accelerated decolonisation, and hardened the apartheid state. The father's family lived inside this machinery — the same pass-law logic that would stamp him out in the mid-1960s.",
+    quote: "1960: the year the world learned what the pass laws meant."
+  },
+  resettlement: {
+    title: "Natives Resettlement Act — Act No. 19 of 1954",
+    era: "The legal engine of the removals",
+    body: "The Act empowered the Urban Resettlement Board to clear Africans from the Western Areas. It bypassed the local city council and gave the central state total power to remove families — especially vulnerable subtenants and backyard shack dwellers.",
+    chain: "POLITICAL → SOCIAL: a law that turned 22,500+ families into 'resettled' statistics. The family was 'in it' — caught in the middle of this removal.",
+  },
+  meadowlands: {
+    title: "Meadowlands · 10 Feb 1955",
+    era: "The trucks",
+    body: "Beginning 10 February 1955, armed police forcibly evicted residents of Sophiatown and W.N.T., loading them into military trucks for relocation to the 'matchbox' houses of Meadowlands (later part of Soweto). By 1968, 22,500+ families had been relocated.",
+    chain: "The family did NOT go to Meadowlands — they stayed in the district, in Westbury Flats. Their story resists the standard narrative.",
+  },
+  westbury: {
+    title: "Westbury — The Renaming",
+    era: "W.N.T. re-zoned, renamed 1973",
+    body: "Westbury IS Western Native Township. After the African population was cleared, the ground was re-zoned for Coloured and Indian residents under the Group Areas Act and renamed Westbury. The family moved into Westbury Flats ~1974 — a kilometre from Kanyile Street, on the 3rd floor — while Hamede was at Bosmont High (age ~16).",
+    chain: "POLITICAL → SOCIAL: the state didn't move the family. It renamed the ground, re-zoned it, rebuilt it — and the family stayed on the same earth under a new name.",
+    quote: "\"We were in it — they built new flats and houses while we were still there in sections.\" — Hamede"
+  },
+  bangalalas: {
+    title: "Bangalalas — Those Who Do Not Sleep",
+    era: "1951–1952 · Civic Guards vs the 'Russians'",
+    body: "In August 1951, ~500 residents of W.N.T. and Sophiatown launched the Civic Guard — the bangalalas (Zulu: 'those who do not sleep'). Armed only with basic weapons and armbands, they cut crime in half. They clashed with the 'Russians' — a Sotho migrant gang — in battles that killed 31 and injured hundreds. In late 1952 the state banned the Guards and arrested their leaders.",
+    chain: "SOCIAL → POLITICAL: a community that policed itself was more dangerous to the state than the gangs. Verwoerd backed the gangsters — 'more sinned against than sinning.'",
+  },
+  verwoerd: {
+    title: "Verwoerd's Bias",
+    era: "'More sinned against than sinning'",
+    body: "H.F. Verwoerd, Minister of Native Affairs and later architect of apartheid, backed the police against the Civic Guards and cynically declared the 'Russians' gang 'more sinned against than sinning' compared to the politically active Guards.",
+    chain: "The future prime minister of apartheid sided with the gangsters against the community's own defence — the state's moral order, inverted.",
+  },
+  georgie: {
+    title: "Georgie Jones — The Friend",
+    era: "616 Kanyile Street · friend from the beginning",
+    body: "Georgie Jones was Hamede's neighbour at 616 Kanyile Street, W.N.T. — a friend 'right from the beginning', still alive, still in contact. 'We've been through the trenches together. We had the same friends. We lost the same friends.' Hamede once watched Georgie get stabbed right in front of him — they rushed him to hospital; he survived. Hamede: 'It would be a grave error to mention my past without mentioning Georgie.'",
+    chain: "THE SURVIVOR: against the weekend-funeral rhythm, Georgie is the one who made it — the living thread back to W.N.T. The place was left, but the friend was carried out.",
+    quote: "\"We've been through the trenches together. We had the same friends. We lost the same friends.\" — Hamede"
+  },
+  philip: {
+    title: "Phillip Winnaar — Best Man · The Letter",
+    era: "The crew · jail → Jehovah's Witness",
+    body: "Phillip Winnaar was Hamede's best man and best friend from the W.N.T. crew. He went to jail for various things. From Ennerdale, Hamede wrote him a letter about the truth he had found — and forgot about it. Years later Phillip told him: 'That letter you wrote me made a big impact in my life.' Phillip transformed, became a Jehovah's Witness, and died 3–4 years ago. His story appeared in Awake! (July 2011, p. 25): 'Philip was a gangster in South Africa. He spent time in jail for his crimes. But despite his lifestyle, Philip longed to know God... Jehovah saw something good in me and drew me to his people.'",
+    chain: "THE LETTER, THE REDEMPTION: a single letter, written and forgotten, changed a man's life. Hamede's eulogy for Phillip (note 18) carries the Elijah mantra — 1 Kings 19:9,10, 'What is your business here, Elijah?' — his life was never in vain, he was never alone, he was never scared.",
+    quote: "\"That letter you wrote me made a big impact in my life.\" — Phillip Winnaar"
+  },
+  awake: {
+    title: "Awake! — July 2011, p. 25",
+    era: "Phillip in his own words",
+    body: "'Philip was a gangster in South Africa. He spent time in jail for his crimes. But despite his lifestyle, Philip longed to know God. He stopped his bad practices and cut off contact with his criminal associates. What Bible truths motivated him to make such changes? Jehovah's Witnesses showed him Jesus' words found at John 6:44: \"No man can come to me unless the Father, who sent me, draws him.\" Philip says, \"Jehovah saw something good in me and drew me to his people, this wonderful brotherhood.\"'",
+    chain: "THE PUBLISHED RECORD: a life once defined by the state and the street, retold in a magazine that reaches millions — the transformation that Hamede's forgotten letter helped set in motion.",
+    quote: "\"Jehovah saw something good in me and drew me to his people, this wonderful brotherhood.\" — Phillip Winnaar, Awake! July 2011"
+  },
+  carnation: {
+    title: "Carnation Revolution · 25 Abril 1974",
+    era: "The empire's collapse frees the brothers",
+    body: "On 25 April 1974, a near-bloodless military coup in Lisbon — the Carnation Revolution — ended Portugal's authoritarian regime and its colonial wars. Mozambique became independent on 25 June 1975. Abdul and Younnis, trapped in Maputo by the deportation's aftermath, were finally free to move.",
+    chain: "GLOBAL → REGIONAL: Britain and Portugal went broke financing empire. Decolonisation was economic exhaustion, not benevolence — Hamede's thesis.",
+    quote: "\"South Africa's independence did not come from English benevolence but because they were broke.\" — Hamede"
+  },
+  bretton: {
+    title: "Bretton Woods · 1944 · Bancor Rejected",
+    era: "The deep current turns",
+    body: "At Bretton Woods in 1944, Keynes proposed the Bancor — a neutral international currency that would punish both hoarders and debtors, keeping the powerful honest. The US rejected it; the dollar became supreme. The post-war order was built on the dollar, and the British Empire's financial decline accelerated.",
+    chain: "GLOBAL → the deep current: the Bancor's rejection made the dollar the world's paper. The father was swept into Johannesburg by the gold standard; his world was unmade by the dollar order and the sterling crises.",
+  },
+  sterling: {
+    title: "Sterling Crash · 1949",
+    era: "The pound collapses",
+    body: "On 18 September 1949, Britain devalued the pound by 30.5% — a symbol of the empire's post-war bankruptcy (lend-lease cancelled 1945, the American loan 1946). The year of Sully's birth, 1949, sits on this hinge.",
+    chain: "GLOBAL → FAMILY: the empire that wrote the father's deportation order was broke. Every sterling crisis was a step toward the empire's end.",
+  },
+  ennerdale: {
+    title: "Ennerdale — The First House",
+    era: "~1979 · married at 21",
+    body: "Hamede married Ann Elizabeth at 21 (~1979) and moved to Ennerdale, ~45 km from the township, buying his first house to escape the gangsters. The story is bittersweet: brother Rashid got the offer first but didn't want it; Hamede took it; a year in, jealousy and a near-blows fight; their mother intervened; Hamede moved back to Rashid's flat; a year later he got his own place 'after pulling some strings'.",
+    chain: "SOCIAL → FAMILY: the escape was real but not clean. 'It wasn't a clean movie.' He arrived in Cape Town with savings — and bought where he wanted.",
+    quote: "\"It wasn't a clean movie.\" — Hamede, on the first house"
+  },
+  rashid: {
+    title: "Rashid — The Systems Analyst",
+    era: "b. 1 Dec 1954 · d. ~1987–88 at 33",
+    body: "Rashid was Hamede's role model — a great soccer player, one of the few black systems analysts in the computer industry under apartheid, earning well at a large pharmaceutical company. But 'he could not shake the bad habits.' After the Ennerdale fight, the brothers didn't speak for 3 years. They reconciled when Hamede moved into his own house a few streets away. At 33, Rashid died in a head-on collision at 2:00 am, driving home drunk.",
+    chain: "FAMILY → SOCIAL: a barrier-breaker who lost his private fight. 'That was a great shock and further motivation to get out of Jhb.'",
+    quote: "Rashid — far left in the wedding party photo, his son in Aboobaker's arms."
+  },
+  mobil: {
+    title: "Mobil — Cape Town 1990",
+    era: "The year Mandela walked free",
+    body: "In 1990, Hamede transferred to Cape Town at his own request, working for Mobil Oil Company (career thread: Mobil → Engen, 1980–2003). He left Johannesburg the year Mandela walked free — 'to escape the gangster infested townships.'",
+    chain: "FAMILY → NATION: 1990, the hinge of the new South Africa, and the year the family's last Johannesburg chapter closed.",
+    quote: "Left Joburg the year Mandela walked free."
+  },
+  laura: {
+    title: "Laura — A Sobrevivente",
+    era: "b. 9 Jan 1964 · the surviving twin",
+    body: "Laura is the true last-born — a surviving twin, born 9 January 1964. Her twin brother Faizel died at seven months of meningitis. The mother, grieving, poor, with an unreliable husband, let the baby go when Abiba visited Johannesburg after Faizel's death — 'without us knowing, only the adults.' Laura was raised in Maputo as Abiba's own child. She was never told she had a family in South Africa. The father knew her — photographed with her in Maputo — but she never knew he was her father.",
+    chain: "FAMILY → THE SECRET: the twinship, the death, the giving-away, the silence. The secret travelled with her to Portugal.",
+  },
+  faizel: {
+    title: "Faizel — O Gémeo",
+    era: "1964 · d. at 7 months · meningitis",
+    body: "Laura's twin brother. He died at seven months of meningitis — the sadness Hamede remembers from the house when he was a little boy. The grief preceded the handover: within months of Faizel's death, Abiba visited Johannesburg and left with the surviving baby. One twin lost to illness, the other carried to Maputo — the mother's double loss in a single year.",
+    chain: "FAMILY → THE HINGE: Faizel's death and Laura's departure happen in the same year — 1964, the year the mother's passport was renewed (Apr 1964). The state's paperwork and the family's paperwork ran in parallel.",
+    quote: "A boy who died at seven months — and whose name the family has carried since."
+  },
+  nels: {
+    title: "The Nels — White in Appearance, Classified 'Coloured'",
+    era: "The provisional whiteness",
+    body: "The Nel family, the mother's family, looked white — but the apartheid government classified them 'coloured'. Their bitterness came from that provisional whiteness: 'very racist wannabes', overcompensating. 'If you look white you can get privilege — as long as nobody asked proof.' Jennifer, Sully's wife, looked white too — she worked as a white hairdressing specialist and earned well.",
+    chain: "SOCIAL → POLITICAL: families stood at the same station, saw their own siblings, and would not greet them — because they were 'posers'. 'That is what apartheid did — it twisted and altered a person's identity.' The state twisted the Ali family and the Nel family alike.",
+    quote: "Siblings on the same platform, pretending not to see each other. That is what apartheid did."
+  },
+  abiba: {
+    title: "Abiba — A Tia que Criou",
+    era: "The aunt who raised Laura",
+    body: "Abiba, the father's sister, raised Laura in Maputo as her own adopted child. She visited Johannesburg after Faizel's death (≈late 1964) and took the surviving baby back to Maputo — the handover done 'without us knowing, only the adults.' On Hamede's first visit to eldest brother Abdul in Maputo, Abdul took him to Abiba, who showed him a photograph of a little girl — 'exactly like my mother, green eyes, white amongst all the black faces in Maputo.' That was Laura. Abiba gave Hamede Laura's details; Laura had already left for Portugal with her ex-husband.",
+    chain: "FAMILY → THE FINDING: the bridge was Abiba — keeper of the secret, then keeper of the key. 'But she was never told.' The secret travelled with her across the sea.",
+  }
+};
+
+/* ============ OPEN / CLOSE ============ */
+function openPassport(){
+  document.getElementById('cover').style.display='none';
+  document.getElementById('passport').classList.add('open');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function openStamp(key){
+  const s = STAMPS[key];
+  if(!s) return;
+  document.getElementById('modalContent').innerHTML =
+    '<button class="close" onclick="closeModal(event)">×</button>' +
+    '<h3>'+s.title+'</h3>' +
+    '<div class="modal-era">'+s.era+'</div>' +
+    '<p>'+s.body+'</p>' +
+    (s.chain ? '<div class="chain"><b>THE CHAIN:</b> '+s.chain+'</div>' : '') +
+    (s.quote ? '<div class="quote">'+s.quote+'</div>' : '');
+  document.getElementById('modalBackdrop').classList.add('show');
+}
+function closeModal(e){
+  if(e && e.target.id === 'modalContent') return;
+  document.getElementById('modalBackdrop').classList.remove('show');
+}
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); });
+
+/* ============ RAIL NAV (V5 — story chapters) ============ */
+function jumpTo(id){
+  const map = {
+    dedication: 0, line: 1, prologue: 2, pull: 3, keeper: 4, stamp: 5, map: 6,
+    inbetween: 7, tribute: 8, stranded: 9, out: 10, finding: 11, patterns: 12, bridge: 13, mirror: 14
+  };
+  const pages = document.querySelectorAll('.page');
+  const idx = map[id] !== undefined ? map[id] : 0;
+  if(pages[idx]) pages[idx].scrollIntoView({behavior:'smooth'});
+}
+
+/* ============ THE STREAM (V5) ============ */
+(function(){
+  const bar = document.getElementById('streamBar');
+  if(!bar) return;
+  const segs = bar.querySelectorAll('.stream-seg');
+  const pages = document.querySelectorAll('.page');
+  // segment index → page index (0-based .page positions)
+  const segToPage = [3,3,3,6,5,11,5,9,10,10,11];
+  segs.forEach((seg, i) => {
+    seg.addEventListener('click', () => {
+      const p = pages[segToPage[i]];
+      if(p) p.scrollIntoView({behavior:'smooth'});
+    });
+  });
+  // scroll-spy: highlight the active segment
+  function onScroll(){
+    const y = window.scrollY + 240;
+    let active = 0;
+    segToPage.forEach((p, i) => {
+      if(pages[p] && pages[p].offsetTop <= y) active = i;
+    });
+    segs.forEach((s, i) => s.classList.toggle('active', i === active));
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+})();
+
+/* ============ MIRROR ============ */
+function saveMirror(){
+  const name = document.getElementById('mirror-name').value;
+  const data = {
+    name,
+    y1949: document.getElementById('mirror-1949').value,
+    y1959: document.getElementById('mirror-1959').value,
+    y1975: document.getElementById('mirror-1975').value,
+    y1994: document.getElementById('mirror-1994').value,
+    out: document.getElementById('mirror-out').value
+  };
+  try{
+    const blob = new Blob([JSON.stringify(data,null,2)], {type:'application/json'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = (name || 'my-family') + '-pattern.json';
+    a.click();
+    alert('Your family\'s pattern has been saved. This is the discovery — the mirror of the memoir.');
+  }catch(e){ alert('Could not save — copy your answers instead.'); }
+}
+</script>
+</body>
+</html>

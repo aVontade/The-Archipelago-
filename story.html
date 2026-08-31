@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Archipelago of Resilience — The Ali Family's Century-Long Journey</title>
+<style>
+:root{
+  --navy:#1F3864; --avo:#2E5FA3; --light:#DEEAF6; --gold:#C9A227;
+  --green:#1F6B4F; --red:#8C2F39; --grey:#6B7280; --purple:#5B4B8A;
+  --paper:#F4EEDF; --ink:#2B2620; --cream:#FFFDF6;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Georgia','Times New Roman',serif;
+  background:var(--paper);color:var(--ink);line-height:1.78;
+  background-image:
+    radial-gradient(ellipse at 20% 10%, rgba(201,162,39,0.06), transparent 50%),
+    radial-gradient(ellipse at 80% 90%, rgba(46,95,163,0.05), transparent 50%),
+    repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.015) 3px, rgba(0,0,0,0.015) 4px);
+}
+::selection{background:var(--gold);color:var(--navy);}
+/* masthead */
+.masthead{
+  background:radial-gradient(ellipse at center, #2A4B7C 0%, var(--navy) 55%, #16294A 100%);
+  color:var(--light);text-align:center;padding:4rem 1.5rem 3rem;position:relative;
+}
+.masthead .kicker{font-family:'Courier New',monospace;font-size:0.7rem;letter-spacing:0.35em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;}
+.masthead h1{font-size:clamp(1.9rem,5vw,3.4rem);color:var(--gold);letter-spacing:0.06em;line-height:1.2;margin-bottom:1rem;}
+.masthead .sub{font-family:'Courier New',monospace;font-size:0.75rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--light);opacity:0.85;}
+.masthead .journey{margin-top:1.5rem;display:flex;justify-content:center;gap:0.6rem;flex-wrap:wrap;}
+.masthead .journey span{border:1px solid rgba(244,238,223,0.4);border-radius:3px;padding:0.25rem 0.7rem;font-family:'Courier New',monospace;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;transform:rotate(-1deg);}
+.masthead .journey span:nth-child(even){transform:rotate(1.5deg);}
+/* nav */
+.navline{
+  background:rgba(22,41,74,0.97);border-bottom:2px solid var(--gold);
+  padding:0.55rem 1rem;text-align:center;position:sticky;top:0;z-index:50;
+  font-family:'Courier New',monospace;font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;
+}
+.navline a{color:var(--light);text-decoration:none;margin:0 0.8rem;opacity:0.8;transition:opacity 0.2s;}
+.navline a:hover{opacity:1;color:var(--gold);}
+.navline .here{color:var(--gold);opacity:1;font-weight:bold;}
+.navline .btn{
+  cursor:pointer;border:1px solid rgba(201,162,39,0.6);border-radius:3px;
+  padding:0.2rem 0.6rem;margin-left:0.6rem;background:transparent;color:var(--light);
+  font-family:inherit;font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;
+  transition:all 0.2s;
+}
+.navline .btn:hover{background:var(--gold);color:var(--navy);border-color:var(--gold);}
+.navline .btn.active{background:var(--gold);color:var(--navy);border-color:var(--gold);}
+.translate-note{
+  text-align:center;font-family:'Courier New',monospace;font-size:0.62rem;
+  letter-spacing:0.2em;text-transform:uppercase;color:var(--navy);
+  background:rgba(201,162,39,0.12);padding:0.5rem;border-bottom:1px solid rgba(201,162,39,0.3);
+  display:none;
+}
+.translate-note.show{display:block;}
+/* contents */
+.contents{max-width:720px;margin:2.2rem auto 0;padding:1.4rem 1.6rem;background:var(--cream);border:1px solid #D8D0BD;box-shadow:0 3px 14px rgba(0,0,0,0.08);}
+.contents .toc-title{font-family:'Courier New',monospace;font-size:0.62rem;letter-spacing:0.3em;color:var(--gold);text-transform:uppercase;margin-bottom:0.8rem;text-align:center;}
+.contents ol{columns:2;column-gap:2rem;list-style:none;counter-reset:toc;}
+.contents li{counter-increment:toc;margin-bottom:0.35rem;font-size:0.85rem;}
+.contents li::before{content:counter(toc,decimal-leading-zero);font-family:'Courier New',monospace;color:var(--gold);font-size:0.7rem;margin-right:0.5rem;}
+.contents a{color:var(--navy);text-decoration:none;border-bottom:1px dotted rgba(31,56,100,0.4);}
+.contents a:hover{color:var(--gold);}
+@media(max-width:600px){.contents ol{columns:1;}}
+/* article */
+.article{max-width:720px;margin:0 auto;padding:2.5rem 1.5rem 4rem;}
+.part{
+  text-align:center;margin:4rem 0 2.5rem;padding:1.2rem 1rem;
+  border-top:1px solid rgba(201,162,39,0.5);border-bottom:1px solid rgba(201,162,39,0.5);
+}
+.part{
+  text-align:center;margin:4rem 0 2.5rem;padding:2.6rem 1.5rem;
+  background:linear-gradient(180deg, rgba(22,41,74,0.04), transparent 40%);
+  border-top:1px solid rgba(201,162,39,0.45);border-bottom:1px solid rgba(201,162,39,0.45);
+  position:relative;
+}
+.part::before{content:'';position:absolute;top:-2px;left:50%;transform:translateX(-50%);width:70px;height:3px;background:var(--gold);}
+.part .pn{font-family:'Courier New',monospace;font-size:0.62rem;letter-spacing:0.45em;color:var(--gold);text-transform:uppercase;margin-bottom:0.9rem;}
+.part .pt{font-size:clamp(1.4rem,3.5vw,2rem);color:var(--navy);margin-top:0.3rem;font-style:italic;letter-spacing:0.02em;line-height:1.3;}
+.part .pt-sub{font-family:'Courier New',monospace;font-size:0.65rem;letter-spacing:0.22em;color:var(--grey);text-transform:uppercase;margin-top:0.8rem;}
+.part .wave{margin:1.2rem auto 0;max-width:260px;height:14px;opacity:0.55;background-repeat:repeat-x;background-size:auto 14px;}
+.chapter{margin-bottom:3.2rem;}
+.chapter .ch-no{font-family:'Courier New',monospace;font-size:0.68rem;letter-spacing:0.3em;color:var(--gold);text-transform:uppercase;margin-bottom:0.4rem;}
+.chapter h2{font-size:clamp(1.35rem,3.5vw,1.9rem);color:var(--navy);margin-bottom:0.4rem;line-height:1.25;}
+.chapter .era{font-family:'Courier New',monospace;font-size:0.68rem;letter-spacing:0.18em;color:var(--grey);text-transform:uppercase;margin-bottom:1.3rem;}
+.chapter p{margin-bottom:1.1rem;font-size:1.02rem;color:#33302A;}
+.chapter p b{color:var(--navy);}
+.chapter p.lede{font-size:1.13rem;line-height:1.6;color:var(--navy);font-style:italic;}
+/* the current interludes */
+.current{
+  background:rgba(46,95,163,0.07);border-left:4px solid var(--avo);
+  padding:1rem 1.2rem;margin:1.5rem 0;border-radius:0 4px 4px 0;font-size:0.95rem;
+}
+.current .tag{display:block;font-family:'Courier New',monospace;font-size:0.6rem;letter-spacing:0.25em;color:var(--avo);text-transform:uppercase;margin-bottom:0.4rem;}
+/* pull quotes */
+.pull{
+  font-size:1.32rem;line-height:1.45;color:var(--red);text-align:center;
+  font-style:italic;margin:2.1rem 0;padding:0 1rem;
+}
+.pull .who{display:block;font-family:'Courier New',monospace;font-size:0.62rem;letter-spacing:0.25em;color:var(--grey);text-transform:uppercase;font-style:normal;margin-top:0.6rem;}
+/* heirloom plates */
+.plate{max-width:620px;margin:2.2rem auto;}
+.plate .frame{
+  background:#FFFFFF;padding:18px 18px 12px;
+  border:1px solid #CFC6AE;
+  box-shadow:0 10px 34px rgba(0,0,0,0.28), inset 0 0 0 1px rgba(255,255,255,0.6);
+  position:relative;
+}
+.plate .frame::before{content:'';position:absolute;inset:7px;border:1px solid rgba(201,162,39,0.55);pointer-events:none;}
+.plate .imgbox{overflow:hidden;background:#FFFFFF;}
+.plate .imgbox img{display:block;width:100%;height:auto;transform:scale(1.04);filter:sepia(0.10) contrast(1.02) saturate(0.98);}
+.plate:nth-of-type(odd) .frame{transform:rotate(-0.5deg);}
+.plate:nth-of-type(even) .frame{transform:rotate(0.4deg);}
+.plate .cap{
+  text-align:center;font-family:'Courier New',monospace;font-size:0.62rem;letter-spacing:0.2em;
+  color:var(--grey);text-transform:uppercase;padding:0.8rem 0.5rem 0.2rem;
+}
+.plate .cap b{color:var(--navy);letter-spacing:0.24em;}
+/* audio artifact */
+.audio-box{max-width:520px;margin:1.6rem auto;background:var(--cream);border:1px solid #CFC6AE;padding:0.9rem 1.1rem;box-shadow:0 6px 20px rgba(0,0,0,0.12);}
+.audio-box .at{font-family:'Courier New',monospace;font-size:0.6rem;letter-spacing:0.25em;color:var(--gold);text-transform:uppercase;margin-bottom:0.5rem;text-align:center;}
+.audio-box audio{width:100%;height:34px;}
+/* closing */
+.closing{text-align:center;padding:3.5rem 1.5rem;background:rgba(22,41,74,0.04);border-top:2px solid var(--gold);}
+.closing .amen{font-family:'Courier New',monospace;font-size:0.7rem;letter-spacing:0.3em;color:var(--gold);text-transform:uppercase;margin-top:1.2rem;}
+.cta{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:2.5rem;}
+.cta a{
+  display:inline-block;padding:0.85rem 1.8rem;border-radius:4px;text-decoration:none;
+  font-family:'Courier New',monospace;font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;
+  border:2px solid var(--navy);color:var(--navy);transition:all 0.2s;
+}
+.cta a.primary{background:var(--gold);border-color:var(--gold);color:var(--navy);font-weight:bold;}
+.cta a:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,0.15);}
+.footer{text-align:center;padding:2rem;font-family:'Courier New',monospace;font-size:0.62rem;letter-spacing:0.25em;color:var(--grey);text-transform:uppercase;}
+@media(max-width:600px){.article{padding:2rem 1.1rem 3rem;}.pull{font-size:1.12rem;}}
+/* print / PDF */
+@media print{
+  .navline{display:none;}
+  .translate-note{display:none;}
+  audio{display:none;}
+  .contents{box-shadow:none;border:none;}
+  body{background:#fff;}
+  .masthead{background:#fff;color:var(--navy);padding:1.5rem 1rem;}
+  .masthead .kicker{color:var(--gold);}
+  .masthead h1{color:var(--navy);}
+  .masthead .sub{color:var(--grey);}
+  .plate{page-break-inside:avoid;}
+  .chapter{page-break-inside:auto;}
+  h2{page-break-after:avoid;}
+  .part{page-break-before:always;}
+}
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="kicker">The Ali family story</div>
+  <h1>The Archipelago</h1>
+  <div class="sub">A century-long journey, told for this generation</div>
+</div>
+
+<div class="navline">
+  <a href="index.html">The Passport</a>
+  <a href="story.html" class="here">The Story</a>
+  <a href="family-tree.html">The Family Tree</a>
+  <button class="btn" id="trBtn" onclick="toggleTranslate()">🌐 Português</button>
+  <button class="btn" id="pdfBtn" onclick="downloadPdf()">⤓ PDF</button>
+</div>
+<div class="translate-note" id="trNote">Ler em Português · tradução automática</div>
+
+<div class="contents">
+  <div class="toc-title">Contents · The Whole Story</div>
+  <ol>
+    <li><a href="#ch1">The Map</a></li>
+    <li><a href="#ch2">The Volcanic Cradle</a></li>
+    <li><a href="#ch3">The Maritime Corridor</a></li>
+    <li><a href="#ch4">The Pull of the Rand</a></li>
+    <li><a href="#ch5">Sophiatown &amp; the Freehold Dream</a></li>
+    <li><a href="#ch6">The Nels: Provisional Whiteness</a></li>
+    <li><a href="#ch7">The Machinery</a></li>
+    <li><a href="#ch8">The Map That Moved</a></li>
+    <li><a href="#ch9">The Twins, 1964</a></li>
+    <li><a href="#ch10">The Salazar Broadcasts</a></li>
+    <li><a href="#ch11">The Stamp</a></li>
+    <li><a href="#ch12">The Stranded</a></li>
+    <li><a href="#ch13">The Boy</a></li>
+    <li><a href="#ch14">The Texture</a></li>
+    <li><a href="#ch15">The Crew</a></li>
+    <li><a href="#ch16">Rashid</a></li>
+    <li><a href="#ch17">The Wedding</a></li>
+    <li><a href="#ch18">Ennerdale: The First House</a></li>
+    <li><a href="#ch19">The Transfer, 1990</a></li>
+    <li><a href="#ch20">The Photograph</a></li>
+    <li><a href="#ch21">The Sister</a></li>
+    <li><a href="#ch22">The Witness, 1994</a></li>
+    <li><a href="#ch23">The Patterns</a></li>
+    <li><a href="#ch24">The Bridge</a></li>
+  </ol>
+</div>
+
+<div class="article">
+
+  <!-- ============ PART I · THE ARCHIPELAGO ============ -->
+  <div class="part"><div class="pn">Part One</div><div class="pt">The Archipelago</div><div class="pt-sub">Comores · Moçambique · South Africa · Portugal</div></div>
+
+  <!-- I -->
+  <div class="chapter" id="ch1">
+    <div class="ch-no">I · The Map</div>
+    <h2>Four countries. Three empires. One family.</h2>
+    <div class="era">The core irony of the twentieth century</div>
+    <p class="lede">To study this family is to watch the deep currents of global policy reach into a private living room — and scatter a bloodline across three empires.</p>
+    <p>Their path winds through four countries — the Comoros Islands, Mozambique, South Africa, Portugal — and the shifting tectonics of the French, Portuguese and British empires. A father who owned freehold property and built a community was arrested as an "illegal immigrant" and deported, dying in exile. His eldest sons were barred from returning to their mother for decades, strangers to their own kin. A surviving twin, handed over in a moment of grief and poverty, grew up across the border unaware that her family existed at all.</p>
+    <p>But this is not a tally of tragedies. It is the story of an <b>archipelago</b> — individuals separated by vast oceans of policy and time, yet anchored to a shared identity by something the state could never stamp out. Just as islands are connected beneath the water by the same volcanic crust, the Ali family remained connected by shared values even when the surface of their lives appeared fractured.</p>
+    <p>Their legacy begins not in the townships of Johannesburg, but in the volcanic fires of the Indian Ocean. And it is told here by the last remaining child of that generation — the one who got out, who studied the pattern, and who means to hand it to his sons and his granddaughter.</p>
+    <div class="pull">"My story is not unique — but too common to ignore the patterns.<span class="who">Hamede Ali</span></div>
+  </div>
+
+  <!-- II -->
+  <div class="chapter" id="ch2">
+    <div class="ch-no">II · The Volcanic Cradle</div>
+    <h2>Where the line begins: Comoros</h2>
+    <div class="era">Mbadjé, Ngazidja · the Mozambique Channel · early 20th century</div>
+    <p>The family's origins lie in the <b>Mbadjé region of Ngazidja</b>, the largest and youngest island of the Comoros archipelago. There, Mount Karthala rises more than 7,000 feet above the sea — a live volcano, and a physical reminder of the volatile ground on which the family first stood.</p>
+    <p>The Comorian world was a mosaic: Swahili, Arabic and Malagasy influences, shaped by centuries of spice and maritime trade. The language was a dialect of Swahili. The faith was Islam. And that single fact — language — would matter enormously, because it made the family <b>not foreigners</b> on the African mainland, but part of a deep cultural corridor running down the Swahili coast.</p>
+    <p>In the early twentieth century, the ancestors <b>Ali Madimbamba</b> and <b>Amina Adarafina</b> chose to leave the beautiful, isolated islands. They were driven by the universal push of limited island resources and the pull of the African mainland — a dream of a better future through the burgeoning trade networks of the coast.</p>
+    <p>Their departure was a short but momentous 188-mile crossing of the Mozambique Channel — a maritime highway that would eventually lead them deep into the heart of southern Africa.</p>
+    <div class="current"><span class="tag">The current · the Indian Ocean web</span>The family was never a lone thread. Their cousin Yusuf Hajee Aboobaker carried roots that stretched back to Oman and Muscat. The whole Indian Ocean world was one migration system — gold, spices, labour and empire all moved along the same sea. Islands are never as isolated as they look from above.</div>
+  </div>
+
+  <!-- III -->
+  <div class="chapter" id="ch3">
+    <div class="ch-no">III · The Maritime Corridor</div>
+    <h2>Mozambique: the land of new beginnings</h2>
+    <div class="era">The generation born into mobility</div>
+    <p>On the mainland, the family settled in Mozambique — and there, <b>Muskien Muze Ali</b> was born: the first of his line born into a legacy of mobility and determination, a child of the maritime crossroads.</p>
+    <p>Because Comorian is a branch of Swahili, the family moved through Mozambique with a natural linguistic bridge. They were part of the coast's deep culture — not strangers to be watched, but kin of a wider web. It is the same web that would one day carry the family's secret: a little girl, raised in Maputo, never told who she was.</p>
+    <p>But the pull of the Rand — the great gold economy of South Africa — proved irresistible. Muskien went south, chasing the fortune that had eluded his ancestors on the islands. He was young, ambitious, and walking straight into the most unequal economy on earth.</p>
+  </div>
+
+  <!-- ============ PART II · THE GOLDEN CRUCIBLE ============ -->
+  <div class="part"><div class="pn">Part Two</div><div class="pt">The Golden Crucible · South Africa, 1940s–1960s</div><div class="pt-sub">Gold · empire · the freehold dream</div></div>
+
+  <!-- IV -->
+  <div class="chapter" id="ch4">
+    <div class="ch-no">IV · The Pull of the Rand</div>
+    <h2>Gold, empire and the road south</h2>
+    <div class="era">1930s–1940s · the Witwatersrand · Wenela</div>
+    <p>Johannesburg in the 1930s and 1940s ran on gold — and gold ran on labour. The Witwatersrand Native Labour Association — <b>Wenela</b> — recruited men by the thousands from across southern Africa, from Mozambique, from Malawi, from as far as the coast, and fed them into the deepest mines on earth. The recruiter's promise was a fortune. The reality was a compound, a number, and a body that the rock could keep.</p>
+    <p>This is the machinery that swept Muskien Muze Ali south. He was a Comorian man in a Portuguese colony — already a subject of one empire — drawn by the pull of another country's gold. He arrived in South Africa in the 1930s or 40s, in the era of the Great Depression and a world sliding toward war.</p>
+    <p>He did not stay a miner's number. He built.</p>
+    <p>Muskien found his way to Sophiatown — the rare place where a black man could own land outright — and he owned it. He built a home, a family, a standing in the community. And in Sophiatown he met and married <b>Alice Nel</b>.</p>
+    <div class="pull">"Powerful countries started pillaging — and I was right in the middle."<span class="who">Hamede Ali</span></div>
+  </div>
+
+  <!-- V -->
+  <div class="chapter" id="ch5">
+    <div class="ch-no">V · Sophiatown &amp; the Freehold Dream</div>
+    <h2>142 Good Street</h2>
+    <div class="era">1940s · the Street of Shebeens · the House of Truth</div>
+    <p>Sophiatown was the intellectual and musical fire of black Johannesburg — the "Western Areas" that the authorities could not stand. Good Street was its sensory heart: the <b>Street of Shebeens</b>, a place of jazz and defiance. At number 39 steps stood Fatty Phyllis Peterson's shebeen. Nearby, the writer Can Themba held court at his "House of Truth." Writers, musicians, boxers, priests and gangsters all breathed the same smoky air.</p>
+    <p>The Ali family home was <b>142 Good Street</b> — freehold. Owned. In a country where black families were being systematically denied the right to own the ground they stood on, Muskien Muze Ali stood on his own title deed.</p>
+    <p>And there, a confluence: the love story between Muskien and <b>Alice Nel</b> — a brilliant local woman, a polyglot who spoke five languages, a woman people simply loved. She was born on 5 September 1921 in Somerset East, in the Cape. Her marriage to a French citizen gave her a French passport — the document that would later become the family's most precious artifact: <i>ALI-NEL, nationalité française, domicile: 142 Good Street.</i></p>
+    <div class="plate">
+      <div class="frame"><div class="imgbox"><img src="assets/mothers_passport_identity_page_2026-08-30.jpg" alt="Alice Nel's French passport — identity page"></div></div>
+      <div class="cap"><b>Plate I</b> · The artifact that opened the whole story — Alice's French passport: ALI-NEL, française, domicile 142 Good Street</div>
+    </div>
+    <p>Together they built a sanctuary between two pulling forces: the gold economy that had drawn him in, and the legislative clampdown that was coming — 1948's National Party victory, the Mixed Marriages and Immorality Acts that would make their very union a crime to the state.</p>
+    <p>For a brief time, the house on Good Street represented the <b>freehold dream</b> — the rare right for black families to own the land they lived on, to build community on their own terms, with their own neighbours: Africans, Indians, Coloureds, Chinese, Jews — the multi-cultural jumble that made Sophiatown itself.</p>
+  </div>
+
+  <!-- VI -->
+  <div class="chapter" id="ch6">
+    <div class="ch-no">VI · The Nels: Provisional Whiteness</div>
+    <h2>The family that was twisted from the other side</h2>
+    <div class="era">The second casualty of the machine</div>
+    <p>Apartheid did not only rupture the Ali family physically. It twisted Alice's family — the <b>Nels</b> — psychologically.</p>
+    <p>The Nels were white in appearance. But the state classified them <b>"coloured."</b> The bitterness that grew in that household came from a terrible in-between: they could pass for white — and so they performed whiteness, desperately. "If you look white you can get privilege — as long as nobody asked proof."</p>
+    <p>The pressure to pass created a deep contempt for Alice's black husband. A boy in that family grew up feeling like an embarrassment for being black — and made his peace with it long ago, the way you make peace with a wound that finally healed. Two of the Nel cousins committed suicide. "They had many tragedies."</p>
+    <div class="pull">"I know of families that would stand at the same station, see their siblings but would not greet or acknowledge them because they were 'posers'. That is what apartheid did — it twisted and altered a person's identity."<span class="who">Hamede Ali — his words, used exactly once</span></div>
+    <p>Identity itself was the first casualty. The Ali family was physically scattered; the Nel family was internally hollowed. The same machine, two different wounds.</p>
+  </div>
+
+  <!-- VII -->
+  <div class="chapter" id="ch7">
+    <div class="ch-no">VII · The Machinery</div>
+    <h2>The state builds the machine</h2>
+    <div class="era">1948–1955 · Acts of Parliament · the bangalalas</div>
+    <p>The National Party won power in 1948 and set about dismantling black South Africa's right to exist in the cities. The <b>Mixed Marriages Act</b> and the <b>Immorality Act</b> criminalised the very love that had built 142 Good Street. The <b>Group Areas Act</b> carved the cities into racial zones. And in 1954 came the <b>Natives Resettlement Act (No. 19 of 1954)</b> — the legal hammer for the Western Areas removals.</p>
+    <p>The plan was old. Western Native Township had been founded in 1918–19; in 1933 Johannesburg declared itself white and some 43,000 Africans became "illegals" overnight; the municipality built only 600 houses, and 17,000 people chose freehold Sophiatown, Newclare and Martindale instead. The state never forgave the defiance.</p>
+    <p>On <b>10 February 1955</b>, the removals began — trucks, police, families and furniture dumped at Meadowlands. By 1968, more than 22,500 families had been moved. Sophiatown's jazz and defiance were bulldozed into a whites-only suburb renamed Triomf — <i>Triumph</i>.</p>
+    <p>And in the township's own streets, a darker machinery turned: the <b>bangalalas</b> — the Civic Guards, "those who do not sleep" — fought the "Russians" gang in 1951–52. Thirty-one people died. Even Verwoerd called the township "more sinned against than sinning."</p>
+    <p>The Ali family was caught in the middle of all of it.</p>
+    <div class="current"><span class="tag">The current · why the removals</span>The Western Areas removals were never only about race. They were about <b>property</b> — freehold land that black owners held title to, in the most valuable suburb next to a white city. The state did not merely hate the music; it wanted the ground. The same logic that later stamped the father "illegal" began with a surveyor's map.</div>
+  </div>
+
+  <!-- VIII -->
+  <div class="chapter" id="ch8">
+    <div class="ch-no">VIII · The Map That Moved</div>
+    <h2>They didn't move the family. They moved the map.</h2>
+    <div class="era">616 Kanyile Street · Western Native Township · Westbury</div>
+    <p>When the removals came, the family did not go to Meadowlands like so many others. They moved from freehold Sophiatown to the municipal rental of <b>616 Kanyile Street, Western Native Township</b> — a council house at R5.00 a month.</p>
+    <p>The state cleared the Western Areas "in sections." Their section survived — through the 1955 evictions, through the 1960s, through everything. Around 1974, the family moved again, a kilometre from Kanyile Street, into the new <b>Westbury Flats</b> — third floor, built on the very ground of the old township.</p>
+    <p>Here is the irony that defines the family's geography: <b>Westbury IS Western Native Township</b>. The ground was re-zoned for Coloured residents under the Group Areas Act, renamed in 1973 — and the family, which had never left the ground, found the ground had been renamed around them.</p>
+    <p>They didn't move the family. They moved the map.</p>
+  </div>
+
+  <!-- ============ PART III · THE RUPTURE ============ -->
+  <div class="part"><div class="pn">Part Three</div><div class="pt">The Rupture · 1964–1975</div><div class="pt-sub">The twins · the broadcasts · the stamp</div></div>
+
+  <!-- IX -->
+  <div class="chapter" id="ch9">
+    <div class="ch-no">IX · The Twins, 1964</div>
+    <h2>Faizel · Laura · the giving-away</h2>
+    <div class="era">January 1964 · the passport that brackets everything</div>
+    <p>In January 1964, Alice gave birth to twins. The boy, <b>Faizel</b>, died at seven months of meningitis. The girl, <b>Laura</b>, survived.</p>
+    <p>Alice was grieving, poor, with an unreliable husband. When Muskien's sister <b>Abiba</b> visited Johannesburg — shortly after Faizel's death — a secret arrangement was made: the baby would go to Maputo, to be raised by Abiba as her own child. The handover happened <b>"without us knowing, only the adults."</b> The children in the house did not know that the baby who left with Aunt Abiba was their sister.</p>
+    <p>The same year, Alice's French passport was renewed — 7 April 1964, at the French Consulate in Johannesburg, valid until 6 April 1967. Look at those dates: the passport brackets <b>everything</b> — Laura's birth, Faizel's death, the handover, and the deportation that would come before the passport expired.</p>
+    <div class="plate">
+      <div class="frame"><div class="imgbox"><img src="assets/mothers_passport_renewal_page_2026-08-30.jpg" alt="Alice Nel's passport — renewal page 1964–1967"></div></div>
+      <div class="cap"><b>Plate II</b> · The renewal page — issued 13 Nov 1958, renewed 7 Apr 1964 → 6 Apr 1967 · French Consulate, Johannesburg</div>
+    </div>
+    <p>The state's paperwork and the family's paperwork ran in parallel: one stamped in ink, the other in silence.</p>
+  </div>
+
+  <!-- X -->
+  <div class="chapter" id="ch10">
+    <div class="ch-no">X · The Salazar Broadcasts</div>
+    <h2>The deep current in the living room</h2>
+    <div class="era">The radio · the shout for interpretation · an empire watched from a township</div>
+    <p class="lede">The global economy was a character in the Ali home — most audibly in the Salazar broadcasts.</p>
+    <p>Muskien did not understand English well. So whenever the news came up on the radio, he would shout for his wife to come and interpret — any development in Portugal, any change in Mozambique, any shift in the political regime. The family joked about it — <i>"what did they say, what did they say?"</i> — but his anxiety was paramount.</p>
+    <div class="pull">"His anxiety, his watchfulness about what was happening in Portugal, was paramount."<span class="who">Hamede Ali — voice note</span></div>
+    <p>Think about what that watching was. A man one empire would soon deport was sitting in a South African township, straining to hear news of <b>António de Oliveira Salazar</b> — dictator of Portugal since 1932, ruler of the empire that governed his homeland. The colonial wars had begun: Angola 1961, Mozambique 1964. Muskien understood that his own freedom, his sons' freedom, the reunification of his family — all of it depended on the collapse of a European power five thousand miles away.</p>
+    <div class="current"><span class="tag">The current · the imbalance engine</span>Bretton Woods, 1944: John Maynard Keynes proposed the <b>Bancor</b> — a neutral international currency that would keep the powerful honest. The United States rejected it; the dollar became supreme. The post-war order devalued migrant labour and trapped families like the Alis in structural poverty. Then sterling crashed in 1949 — the year Sully was born. The empire that would write the father's deportation order was broke. Decolonisation was economic exhaustion, not benevolence.</div>
+    <p>Salazar's stroke came in September 1968. The empire began to die. And in 1975, Mozambique was free — and the brothers who had been locked out of South Africa by its policies were unlocked by the fall of an empire. Hamede's reading of his own family's history is precise:</p>
+    <div class="pull">"South Africa's independence did not come from English benevolence but because they were broke."<span class="who">Hamede Ali</span></div>
+    <div class="audio-box">
+      <div class="at">🎙 Voice note · the Salazar scene &amp; the crew</div>
+      <audio controls preload="none" src="assets/hamede_voice_note_salazar_georgie_philip_2026-08-31.ogg"></audio>
+    </div>
+  </div>
+
+  <!-- XI -->
+  <div class="chapter" id="ch11">
+    <div class="ch-no">XI · The Stamp</div>
+    <h2>The deportation, ≈1966/67</h2>
+    <div class="era">The "foreign native" · the stamp that ended a father's life in his homeland's eyes</div>
+    <p>He was still in South Africa when Laura was born in January 1964. Soon after — approximately 1966/67 — <b>Muskien Muze Ali</b> was arrested as an "illegal immigrant" and deported to Mozambique.</p>
+    <p>Hamede, born in 1958, was eight or nine years old. In his own 2013 notes he wrote "about 8–10 years — the best I could do." The man who had been a lawful freehold owner on Good Street, the man who had built a home and a community, was to the state a <b>foreign native</b> — deportable by definition.</p>
+    <p>He never returned. He died in exile, in Maputo.</p>
+    <p>The father was not a favourite man to his son — the boy would later say the only thing his father taught him was <i>not to be like him</i>. But the pattern of what happened to him is not personal. It is structural. The gold economy had pulled him in; the identity machine stamped him out. And the passport page that recorded the family the state counted — that document — survives, as evidence of who they were.</p>
+    <div class="plate">
+      <div class="frame"><div class="imgbox"><img src="assets/mothers_passport_signalement_page_2026-08-30.jpg" alt="Alice Nel's passport — signalement page, the children listed"></div></div>
+      <div class="cap"><b>Plate III</b> · The signalement page — "Accompagné de quatre enfants" · the children the state recorded, one by one</div>
+    </div>
+    <div class="current"><span class="tag">The current · the hinge of decolonisation</span>The mid-1960s was the hinge of the twentieth century: Verwoerd assassinated 1966, Rhodesia's Unilateral Declaration of Independence, Portugal's colonial wars draining its treasury. The machinery that expelled the father was the same machinery that barred the sons — and the same current that would one day free them.</div>
+  </div>
+
+  <!-- XII -->
+  <div class="chapter" id="ch12">
+    <div class="ch-no">XII · The Stranded</div>
+    <h2>Abdul and Unusse: locked in Maputo</h2>
+    <div class="era">24 de Julho · the brothers who could not come home</div>
+    <p>Two of the family's sons were on the wrong side of the border when the machinery closed. <b>Abdul</b>, the eldest, and <b>Younnis (Unusse)</b> were with Aunt Abiba in Maputo, on 24 de Julho. When their father was deported, they were caught in the aftermath — the same policies that expelled the father barred the sons from returning to South Africa.</p>
+    <p>Think of that for a moment: a mother in Johannesburg, raising the younger children alone, while her two eldest sons lived in a city a few hundred kilometres away and could not come home. For decades. They grew up in Maputo, with Abiba — and, later, with the little girl Laura, the baby handed over in 1964.</p>
+    <p>They were freed by economics. Britain could no longer finance colonialism; Portugal's empire collapsed — the Carnation Revolution, 25 April 1974; Mozambique's independence, 25 June 1975. The borders opened. The brothers could move again.</p>
+    <p>But their father, who had watched the Portuguese news with such anxious attention, died in exile before he could see it.</p>
+    <div class="pull">"The man one empire would deport was watching the other empire that ruled his homeland — waiting for it to fall."<span class="who">The deep current, made personal</span></div>
+  </div>
+
+
+  <!-- ============ PART IV · THE BOY ============ -->
+  <div class="part"><div class="pn">Part Four</div><div class="pt">The Boy Who Refused Desensitization · 1958–1979</div><div class="pt-sub">Dowling Street · the crew · Rashid · the wedding</div></div>
+
+  <!-- XIII -->
+  <div class="chapter" id="ch13">
+    <div class="ch-no">XIII · The Boy</div>
+    <h2>Dowling Street · Bosmont High · the scary misses</h2>
+    <div class="era">1958–1976 · the third floor of Westbury Flats</div>
+    <p>Hamede was born in 1958 — the passport records it: the state's own list of the children, one by one. He grew up at 616 Kanyile Street and, from around 1974, on the third floor of the Westbury Flats, a kilometre from Kanyile. He walked to <b>Dowling Street Primary</b> — the school next door to St Nicholas, the boarding school for delinquent boys — and later to <b>Bosmont High School</b>, where he graduated at seventeen, around 1975/76.</p>
+    <p>Bosmont was a walk away. The family had moved one street north of Kanyile at some point in those years — <b>Kambula Street</b> — before the flats. The geography of his boyhood was tight: school, home, the streets between, all inside the renamed ground of the old township.</p>
+    <p>After school, there was no job waiting. Unemployed black youth were a problem the state policed directly — young men chased through the streets, stopped, searched, asked why they were not somewhere else. "I had some scary misses."</p>
+    <p>And around him, the texture of the in-between: the violence, the funerals, the desensitization that was the whole point of the place. The boy watched it, and he made a decision the place never intended — he would not become numb. He would get out.</p>
+    <div class="pull">"Weekend funerals were regarded as entertainment and free food. A place that sucks the life out of you and desensitizes you against immoral behaviour — best left where it is now."<span class="who">Hamede Ali — his words, used exactly once</span></div>
+  </div>
+
+  <!-- XIV -->
+  <div class="chapter" id="ch14">
+    <div class="ch-no">XIV · The Texture</div>
+    <h2>Violence as background, not spectacle</h2>
+    <div class="era">The bangalalas · the "Russians" · the rhythm of loss</div>
+    <p>The violence of the Western Native Township was not the story of the family — it was the <b>background</b> against which the story had to be lived. It is told here as texture, never as spectacle, because that is how it was: always present, never the point.</p>
+    <p>In the 1950s, the <b>bangalalas</b> — the Civic Guards, "those who do not sleep" — fought the "Russians" gang through these streets. Thirty-one people died in the violence of 1951–52. Don Mattera, the poet, was born in the Township in 1935 and led the Vultures as a young man before he turned to words. The names changed over the decades; the rhythm did not.</p>
+    <p>By the 1970s, the violence had its own calendar: the weekend funeral. Hamede watched friends die — <b>Mike</b>, <b>Charlotte</b> — "too many." The funeral was the social event, the free food, the entertainment. The place was engineered to make a young man stop feeling.</p>
+    <p>In 1976, the uprising that began in Soweto on 16 June spilled into the Township — students marching against Afrikaans as the medium of instruction, police opening fire on children, the anger spreading to every corner of the country. The boy from Westbury Flats saw his generation stand up.</p>
+    <p>And still he refused the numb. It is the single most important fact of this part of the story: <b>desensitization was the goal of the environment, and he refused it.</b> That refusal is what carried him out.</p>
+  </div>
+
+  <!-- XV -->
+  <div class="chapter" id="ch15">
+    <div class="ch-no">XV · The Crew</div>
+    <h2>Georgie Jones &amp; Phillip Winnaar</h2>
+    <div class="era">616 Kanyile Street · the friends who made it through</div>
+    <p class="lede">"It would be a grave error to mention my past without mentioning Georgie."</p>
+    <p><b>Georgie Jones</b> lived at 616 Kanyile Street — the neighbour, the friend from the very beginning. He is still alive, still in contact, still a great friend. Hamede is one year older than Georgie, and the two of them went through everything together.</p>
+    <div class="pull">"We've been through the trenches together. We had the same friends. We lost the same friends."<span class="who">Hamede Ali, on Georgie</span></div>
+    <p>Hamede once watched Georgie get stabbed, in front of him, in the street. He rushed him to hospital. Georgie survived. That is the texture of a friendship forged in the in-between: the same streets that took so many friends did not take him.</p>
+    <p>And then there was <b>Phillip Winnaar</b> — part of the crew, and the man who would stand beside Hamede at his wedding. Phillip's own story was a redemption arc written in the open: he was a gangster in South Africa, ran with the violence of the township, went to prison. And he came out changed — drawn to Jehovah's Witnesses, and to the truth Hamede himself would find.</p>
+    <p>Phillip's story was told in his own words in <i>Awake!</i> magazine (July 2011, p. 25): <i>"Philip was a gangster in South Africa... Jehovah saw something good in me and drew me to his people, this wonderful brotherhood."</i></p>
+    <p>From Ennerdale, Hamede wrote Phillip a letter about the truth he had found — and forgot about it. Years later, Phillip told him: <b>"That letter you wrote me made a big impact in my life."</b> A forgotten letter changed a life. The two men preached together in Klipspruit, where former gangsters greeted Phillip with respect; Hamede helped build the Kingdom Hall in Ennerdale — "this is where I got the truth."</p>
+    <div class="plate">
+      <div class="frame"><div class="imgbox"><img src="assets/phillip_eulogy_image1.jpg" alt="Phillip Winnaar — from the eulogy"></div></div>
+      <div class="cap"><b>Plate IV</b> · Phillip Winnaar — best man · brother · the redeemed one</div>
+    </div>
+    <p>When Phillip died, Hamede was asked to say a few words at the funeral. He stood up and gave what he calls simply "this is it" — the eulogy of a life never lived in vain. Its spine was the <b>Elijah mantra</b>, from 1 Kings 19:9, 10 — the question put to the prophet in his darkest hour: <i>"What is your business here, Elijah?"</i> For Phillip, the answer was always the same: his life was never in vain; he was never alone; he was never scared of defending truth and principle.</p>
+    <div class="pull">"For Phillip, his life was never in vain. He was never alone. He was never scared of defending truth and principle."<span class="who">Hamede Ali — the eulogy · the Elijah mantra</span></div>
+    <p>Phillip leaves his wife <b>Carol</b>; his children <b>Brandon</b> and <b>Angelique</b>; a sister, Morgan, of the Newclare congregation. The best man who once stood beside Hamede now stands as the story's proof: the same environment that desensitized so many could not hold everyone. Some got out — in body, in faith, or both.</p>
+  </div>
+
+  <!-- XVI -->
+  <div class="chapter" id="ch16">
+    <div class="ch-no">XVI · Rashid</div>
+    <h2>The wound under the story</h2>
+    <div class="era">1954–≈1988 · the brother who broke barriers and lost his private fight</div>
+    <p>Rashid — Sulayman's full passport name reads "Sullymanl," 15 October 1949 — was Hamede's role model. A great soccer player. One of the few black <b>systems analysts</b> in the computer industry under apartheid, working for a large pharmaceutical company and earning well. He broke barriers for a living.</p>
+    <p>"But he could not shake the bad habits."</p>
+    <p>Rashid was the first to be offered a house in Ennerdale — the waiting list was five or six years — but he turned it down: family, friends, the drinking. Hamede took his opportunity, and that decision would nearly tear the brothers apart (the story is told in the next chapter). They did not speak for three years. They reconciled when Hamede moved into his own house a few streets away — "great friends" again.</p>
+    <p>At thirty-three, Rashid died in a head-on collision at two in the morning, driving home drunk.</p>
+    <p>The shock of it — and the grief — was one more reason Hamede had to get out of Johannesburg. Rashid is remembered here with love, not judgment: a barrier-breaker who lost his private fight. His son — the little boy in Aboobaker's arms in the wedding-party photograph — grew up fatherless.</p>
+    <div class="pull">"That was a great shock, and further motivation to get out of Jhb."<span class="who">Hamede Ali, on his brother Rashid</span></div>
+  </div>
+
+  <!-- XVII -->
+  <div class="chapter" id="ch17">
+    <div class="ch-no">XVII · The Wedding</div>
+    <h2>Twenty-one years old · Ann Elizabeth</h2>
+    <div class="era">≈1979 · the brothers together · the best man</div>
+    <p>At twenty-one — around 1979 — Hamede married <b>Ann Elizabeth</b>. The black-and-white wedding photograph shows the groom, the bride, and the mother on the far right: the same ALI-NEL from the French passport, present at her son's wedding.</p>
+    <p>The wedding party photograph shows eight men in suits and a child on the lawn outside a brick building. On the far left: <b>Rashid</b> — the reconciled brother, present in the good years before his death. In the middle, kneeling, holding the child: <b>Aboobaker</b> — the younger brother, the one born in 1960, the last of the passport's list. The child in his arms is <b>Rashid's son</b>. On the far right: the groom himself.</p>
+    <p>And among the close friends who stood with him that day — third from the left, with the biggest afro in the row: the best man himself, Phillip Winnaar.</p>
+    <div class="plate">
+      <div class="frame"><div class="imgbox"><img src="assets/hamedes_wedding_party_2026-08-30.jpg" alt="The wedding party — Rashid far left, Aboobaker kneeling with Rashid's son, Hamede far right"></div></div>
+      <div class="cap"><b>Plate V</b> · The wedding party — Rashid far left · Aboobaker kneeling with Rashid's son · the groom far right · third from the left, with the biggest afro: the best man, Phillip Winnaar</div>
+    </div>
+    <p>Marriage at twenty-one was the beginning of the getting out. A man with a wife and, soon, sons, could no longer live in the rhythm of the in-between. He had somewhere to go — and someone to take with him.</p>
+  </div>
+
+  <!-- XVIII -->
+  <div class="chapter" id="ch18">
+    <div class="ch-no">XVIII · Ennerdale: The First House</div>
+    <h2>"It wasn't a clean movie."</h2>
+    <div class="era">≈1980 · forty-five kilometres from the Township · the swap</div>
+    <p>To escape the gangsters, Hamede moved to <b>Ennerdale</b> — about forty-five kilometres from the Western Native Township — and bought his first house. But the story of how he got it is bittersweet, and it is best told in his own voice.</p>
+    <div class="audio-box">
+      <div class="at">🎙 Voice note · the first house</div>
+      <audio controls preload="none" src="assets/hamede_voice_note_first_house_ennerdale_2026-08-30.ogg"></audio>
+    </div>
+    <p>Rashid had been offered the house first — the waiting list was five or six years — but he did not want it. So Hamede took his brother's opportunity. A year in, Rashid visited with his wife. Jealousy. A massive argument. "Almost at blows." Their mother intervened — the peacemaker, as always.</p>
+    <p>Hamede moved back to Rashid's flat so his brother could take the house. A year later, "after pulling some strings," he got his own place — "really an amazing place to have your own house." He made improvements, and when he eventually came to Cape Town he came with sizeable savings, and bought where he wanted.</p>
+    <p>"It wasn't a clean movie."</p>
+    <p>But the pattern held: every decision was aimed at a better chance — for the children who would come, for the life that would be built away from the in-between.</p>
+  </div>
+
+  <!-- XIX -->
+  <div class="chapter" id="ch19">
+    <div class="ch-no">XIX · The Transfer, 1990</div>
+    <h2>The year Mandela walked free, Hamede walked out</h2>
+    <div class="era">1990 · Mobil Oil · Cape Town</div>
+    <p>In 1990, Hamede transferred to Cape Town — at his own request — working for <b>Mobil Oil</b>. It was the year Nelson Mandela walked out of Victor Verster prison. The irony of the calendar is precise: the country was opening its cages at the very moment the last of the Ali children walked out of Johannesburg for good.</p>
+    <p>The career that began with Mobil would become a lifetime's work in people development — at Engen from 1980 to 2003, where the Shared Values Process he championed became a case study at Wits Business School; and then at his own firm, Avontade, teaching organizations to build high-trust cultures. The boy from the renamed ground built a career out of telling institutions that their people were the point.</p>
+    <p>Cape Town is where he raised his sons — <b>Ryan Jared</b> and <b>Warren Ansley</b> — and where the decisions he made all along finally paid out: a different city, a different life, a different inheritance.</p>
+    <div class="pull">"Every decision I made was to give them a better chance."<span class="who">Hamede Ali — for Ryan &amp; Warren &amp; Sully</span></div>
+  </div>
+
+  <!-- ============ PART V · THE FINDING ============ -->
+  <div class="part"><div class="pn">Part Five</div><div class="pt">The Finding · The Secret Sister</div><div class="pt-sub">The photograph · the green-eyed girl · Mano</div></div>
+
+  <!-- XX -->
+  <div class="chapter" id="ch20">
+    <div class="ch-no">XX · The Photograph</div>
+    <h2>The green-eyed girl among the black faces</h2>
+    <div class="era">≈2011 · Maputo · Aunt Abiba's house</div>
+    <p>The fracture began to heal with a photograph.</p>
+    <p>On his first visit to his eldest brother <b>Abdul</b> in Maputo, Abdul took Hamede to meet <b>Aunt Abiba</b>. And Abiba showed him a picture of a little girl — "exactly like my mother, green eyes, white amongst all the black faces in Maputo."</p>
+    <p>The girl was <b>Laura</b> — the true last-born, the surviving twin, the baby handed over in 1964.</p>
+    <p>The 2013 family-tree document holds the same image: <b>the father, Muskien Muze Ali, photographed with little Laura in Maputo</b> — the man who knew her, the man who was her father, standing beside a child who never knew he was her father. And beside them, Abiba's photograph.</p>
+    <div class="plate">
+      <div class="frame"><div class="imgbox"><img src="assets/family_tree_2013_page_mafalala_father_laura_abiba.jpg" alt="The 2013 family tree page — the father with Laura in Maputo, Abiba's photo"></div></div>
+      <div class="cap"><b>Plate VI</b> · From the 2013 family tree — the father with little Laura in Maputo · Mafalala, home of Chissano and Eusébio</div>
+    </div>
+    <p>The photograph places them in <b>Mafalala</b>, the Maputo neighbourhood that produced presidents and poets — Samora Machel's birthplace, home of Chissano, and of Eusébio, the footballer. The caption notes, of one of the boys in the old photo: "3rd from left played soccer with Eusebio." The same streets that raised the greatest footballer of his generation also kept the family's secret.</p>
+    <p>Abiba gave Hamede Laura's details. But Laura had already left Maputo — with her ex-husband, for Portugal. The secret travelled with her across the sea. She was never told.</p>
+  </div>
+
+  <!-- XXI -->
+  <div class="chapter" id="ch21">
+    <div class="ch-no">XXI · The Sister</div>
+    <h2>"Thanks for finding me, Mano — amo te."</h2>
+    <div class="era">Portugal · the last-born · the surviving twin</div>
+    <p>Laura was born on 9 January 1964 — the surviving twin of Faizel, who died at seven months. She was raised by Abiba in Maputo as her adopted child, never told she had a family in South Africa. Her brothers Abdul and Unusse grew up in the same city, on a parallel timeline of silence; she knew them as cousins, not brothers.</p>
+    <p>When the pieces were finally put together — the passport, the photograph, the memory of the handover — Hamede reached his sister in Portugal. She has a daughter, <b>Denise</b>. And her response to being found was not anger, and not grief. It was gratitude and love:</p>
+    <div class="pull">"Thanks for finding me, Mano — amo te."<span class="who">Laura — thank you, brother — I love you</span></div>
+    <div class="plate">
+      <div class="frame"><div class="imgbox"><img src="assets/laura_facebook_post_2026-08-30.jpg" alt="Laura, grown — with her brother Hamede"></div></div>
+      <div class="cap"><b>Plate VII</b> · Laura, grown — "even with the age difference she resembles my mom"</div>
+    </div>
+    <p>Look at the two photographs together — little Laura with her father in Maputo, and grown Laura with the brother who found her — and you see the whole arc of the secret: hidden, carried, crossed an ocean, and finally told. Of the seven children of Muskien Muze Ali and Alice Nel, two remain: Hamede and Laura. The family tree now stands as a unified map — Comoros, Mozambique, South Africa, Portugal.</p>
+  </div>
+
+  <!-- ============ PART VI · THE PATTERN ============ -->
+  <div class="part"><div class="pn">Part Six</div><div class="pt">The Witness &amp; The Pattern</div><div class="pt-sub">1994 · the eight patterns · the bridge</div></div>
+
+  <!-- XXII -->
+  <div class="chapter" id="ch22">
+    <div class="ch-no">XXII · The Witness, 1994</div>
+    <h2>The lines on the television</h2>
+    <div class="era">27 April 1994 · the ballot · the Kingdom</div>
+    <p>In 1994, South Africa held its first democratic election. Hamede did not vote.</p>
+    <p>He watched the snaking lines on television — millions of people, most of them voting for the first time in their lives, many of them standing for hours in the sun for the simple right to mark a paper. He watched, and he did not join them.</p>
+    <div class="pull">"I have taken a neutral stand and don't participate in politics — I already voted for God's Kingdom."<span class="who">Hamede Ali</span></div>
+    <p>It is a fact that some readers will find strange. It deserves to be told plainly, without apology, because it is the key to the man: the same faith that redeemed Phillip, that gave Hamede a family and a purpose when the blood family was scattered, is the faith that governs his citizenship. His hope was never placed in parliaments. He had watched empires rise and fall — French, Portuguese, British, Afrikaner — and he had come to a quieter conviction about where hope actually lives.</p>
+    <p>The witness of 1994: the state finally gave him the vote, and he declined it — not from bitterness, but from belonging to a different Kingdom. That is the spiritual spine of the whole story: when every earthly power failed the family, something else held them.</p>
+  </div>
+
+  <!-- XXIII -->
+  <div class="chapter" id="ch23">
+    <div class="ch-no">XXIII · The Patterns</div>
+    <h2>Not unique. Too common to ignore.</h2>
+    <div class="era">The lesson in the pattern</div>
+    <p class="lede">"My story is not unique — but too common to ignore the patterns."</p>
+    <p>Why tell all this? Because a single family's story, told honestly against the current of its times, is a specimen slide. Under the lens, eight patterns appear — and each one is a warning or a gift for the generations to come.</p>
+    <p><b>1 · Labour is pulled by economic gravity.</b> Gold money pulled the father in — Wenela, the Rand, the great labour magnet. People follow the current before they ever see it.</p>
+    <p><b>2 · Empire's paperwork decides who belongs.</b> Pass laws, "illegal immigrant," a French passport earned by marriage, a deportation order. Belonging is written — and can be un-written.</p>
+    <p><b>3 · Identity itself is the first casualty.</b> The Nels looked white but were classified "coloured" — performing privilege, "racist wannabes," as long as nobody asked for proof. Siblings at the same station would not greet each other. "That is what apartheid did — it twisted and altered a person's identity."</p>
+    <p><b>4 · States redraw the map around people who stay still.</b> W.N.T. → Westbury. The family never moved; the map moved. Freehold → rental → flats, all on the same ground.</p>
+    <p><b>5 · Empire's collapse frees some, strands others.</b> Portugal went broke → the brothers were freed in 1975. The father died in exile from the same machinery. The same current that frees one strands another.</p>
+    <p><b>6 · Violence becomes the texture of the in-between.</b> Weekend funerals as entertainment. Desensitization is the goal — and the danger. A place that sucks the life out of you.</p>
+    <p><b>7 · The ones who get out carry the memory.</b> Hamede and Laura — the living line. Memory is what the survivors carry, and memory is what becomes the book.</p>
+    <p><b>8 · The one who reads the pattern early survives it.</b> Hamede got out before the violence took him. The father couldn't read the forces — he was swept. Read the current before it reads you.</p>
+  </div>
+
+  <!-- XXIV -->
+  <div class="chapter" id="ch24">
+    <div class="ch-no">XXIV · The Bridge</div>
+    <h2>The displaced worker of his era</h2>
+    <div class="era">The memoir and "Reskilling for the AI Economy" are the same book</div>
+    <p>There was no reskilling for the father. The gold-and-empire order collapsed and he was swept out — a displaced worker of an economy he couldn't read. His son spent a career teaching people to see the <b>next</b> transformation coming.</p>
+    <p>The AI economy is now sweeping a generation the way gold-and-empire swept the father. The ones who survive will be the ones who <b>learn to read the forces before the forces read them</b>.</p>
+    <p>This story is not nostalgia. It is a <b>pattern manual</b>. The past is the lens; the future is the lesson.</p>
+    <div class="current"><span class="tag">The current · the next chapter</span>The same deep current that pulled a young man from Comoros to the goldfields now pulls a generation into the AI economy. The lesson: read the current before it reads you. The father couldn't. The son learned to. That is the inheritance.</div>
+    <p>The archipelago holds. Comoros to Mozambique to South Africa to Portugal — islands of one family, connected under the water by the same crust, now connected again on the surface. The story is told for the ones who come next: for <b>Ryan</b> and <b>Warren</b>, and for <b>Sully</b>, the granddaughter named after her great-uncle Sulayman, so that she knows where she comes from.</p>
+    <div class="pull">"I have two sons — this is for them, not about them. Every decision I made was to give them a better chance. Now I have a granddaughter, Sully — she needs to know where she comes from."<span class="who">Hamede Ali</span></div>
+    <p>To see the world as a character in your own story: you are not a passive observer of history. You are the result of deep currents. Understanding them is the first step toward navigating your own archipelago of resilience.</p>
+  </div>
+
+</div>
+
+<div class="closing">
+  <h2 style="color:var(--navy);">To see the world as a character in your own story</h2>
+  <p style="max-width:560px;margin:1rem auto 0;color:#3A352E;">You are not a passive observer of history. You are the result of deep currents. Understanding them is the first step toward navigating your own archipelago of resilience.</p>
+  <div class="cta">
+    <a href="index.html" class="primary">Explore the Passport →</a>
+    <a href="family-tree.html">The Family Tree</a>
+  </div>
+  <div class="amen">For Ryan &amp; Warren · for Sully · Amém · Até amanhã, amigo meu</div>
+</div>
+
+<div class="footer">The Archipelago of Resilience · The Ali Family · 1921 – present · an heirloom, not a website</div>
+
+<script>
+/* ===== TRANSLATE EN/PT (Google translate endpoint, CORS-open) ===== */
+let ptMode = false;
+
+async function translateTexts(){
+  const els = document.querySelectorAll('p, h2, h3, li, figcaption, .kicker, .sub, .pn, .pt, .pt-sub, .ch-no, .era, .pull, .who, .toc-title, .amen');
+  const targets = [...els].filter(e => {
+    if (!e.textContent.trim()) return false;
+    if (e.closest('audio')) return false;
+    if (e.querySelector('img, audio')) return false;
+    return true;
+  });
+  // Batch in chunks of 12 for speed
+  for (let i = 0; i < targets.length; i += 12){
+    const chunk = targets.slice(i, i+12);
+    const texts = chunk.map(e => e.textContent.trim().slice(0, 1800));
+    const url = 'https://clients5.google.com/translate_a/t?client=dict-chrome-ex&sl='
+      + (ptMode ? 'en' : 'en') + '&tl=' + (ptMode ? 'pt' : 'pt')
+      + '&' + texts.map(t => 'q=' + encodeURIComponent(t)).join('&');
+    try{
+      const res = await fetch(url);
+      const data = await res.json();
+      if (Array.isArray(data)){
+        chunk.forEach((e, j) => {
+          const orig = texts[j];
+          const tr = data[j];
+          if (tr) e.textContent = tr;
+        });
+      }
+    }catch(err){
+      console.log('translate chunk failed', i, err);
+    }
+  }
+}
+
+async function toggleTranslate(){
+  ptMode = !ptMode;
+  const btn = document.getElementById('trBtn');
+  const note = document.getElementById('trNote');
+  const body = document.body;
+  if (ptMode){
+    // store originals once, translate to PT
+    if (!body.dataset.origSaved){
+      document.querySelectorAll('p, h2, h3, li, figcaption, .kicker, .sub, .pn, .pt, .pt-sub, .ch-no, .era, .pull, .who, .toc-title, .amen').forEach(e => {
+        if (e.textContent.trim() && !e.querySelector('img, audio') && !e.closest('audio'))
+          e.setAttribute('data-orig', e.textContent);
+      });
+      body.dataset.origSaved = '1';
+    }
+    btn.textContent = '🇬🇧 English';
+    note.textContent = 'A ler em Português · tradução automática — clique em English para voltar';
+    note.classList.add('show');
+    await translateTexts();
+  } else {
+    // restore originals
+    document.querySelectorAll('[data-orig]').forEach(e => e.textContent = e.getAttribute('data-orig'));
+    btn.textContent = '🌐 Português';
+    note.textContent = 'Ler em Português · tradução automática';
+    note.classList.remove('show');
+  }
+}
+
+/* ===== DOWNLOAD PDF ===== */
+function downloadPdf(){
+  window.print();
+}
+</script>
+</body>
+</html>

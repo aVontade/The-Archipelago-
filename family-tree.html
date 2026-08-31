@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Ali-Nel Family Tree — Comoros → Mozambique → South Africa → Portugal</title>
+<style>
+:root{
+  --navy:#1F3864; --avo:#2E5FA3; --light:#DEEAF6; --gold:#C9A227;
+  --green:#1F6B4F; --red:#8C2F39; --ukblue:#2A4B7C; --grey:#6B7280;
+  --purple:#5B4B8A; --paper:#F4EEDF; --paper-dark:#E8DFC8; --ink:#2B2620;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  font-family:'Georgia','Times New Roman',serif;
+  background:var(--paper);color:var(--ink);line-height:1.6;
+  background-image:radial-gradient(ellipse at 20% 10%, rgba(201,162,39,0.06), transparent 50%),radial-gradient(ellipse at 80% 90%, rgba(46,95,163,0.05), transparent 50%);
+}
+::selection{background:var(--gold);color:var(--navy);}
+.header{
+  background:radial-gradient(ellipse at center, #2A4B7C 0%, var(--navy) 60%, #16294A 100%);
+  color:var(--light);padding:3.5rem 2rem;text-align:center;
+}
+.header h1{color:var(--gold);font-size:clamp(1.8rem,4.5vw,3rem);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.8rem;}
+.header .sub{letter-spacing:0.3em;text-transform:uppercase;font-size:0.85rem;opacity:0.85;}
+.header .line{font-family:'Courier New',monospace;font-size:0.7rem;letter-spacing:0.2em;color:var(--gold);margin-top:1.2rem;text-transform:uppercase;}
+.tree{max-width:1000px;margin:0 auto;padding:3rem 1.5rem 5rem;}
+.gen{
+  background:rgba(255,255,255,0.5);border:1px solid rgba(31,56,100,0.15);border-radius:10px;
+  padding:1.8rem;margin-bottom:1.6rem;position:relative;
+}
+.gen::before{
+  content:'';position:absolute;left:50%;top:-1.6rem;width:2px;height:1.6rem;
+  background:repeating-linear-gradient(0deg,var(--gold),var(--gold) 4px,transparent 4px,transparent 8px);
+}
+.gen:first-child::before{display:none;}
+.gen .gen-label{
+  font-family:'Courier New',monospace;font-size:0.7rem;letter-spacing:0.25em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:0.6rem;font-weight:bold;
+}
+.gen .gen-sub{font-size:0.8rem;color:var(--grey);font-style:italic;margin-bottom:1rem;}
+.gen .people{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;}
+.person{
+  background:rgba(255,255,255,0.7);border:2px solid var(--avo);border-radius:8px;
+  padding:0.9rem 1.2rem;min-width:150px;text-align:center;cursor:pointer;
+  transition:transform 0.2s, box-shadow 0.2s;position:relative;
+}
+.person:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,0,0,0.15);}
+.person .name{font-weight:bold;color:var(--navy);font-size:1.05rem;}
+.person .role{font-size:0.75rem;color:var(--grey);font-style:italic;margin-top:0.2rem;}
+.person .dates{font-family:'Courier New',monospace;font-size:0.7rem;color:var(--gold);margin-top:0.3rem;}
+.person.hero{border-color:var(--gold);background:rgba(201,162,39,0.08);}
+.person.hero .name{color:var(--gold);}
+.person.living{border-color:var(--green);}
+.person.deceased{opacity:0.85;border-style:dashed;}
+.person .flag{position:absolute;top:-8px;right:-8px;font-size:1.1rem;background:var(--paper);border-radius:50%;padding:2px;}
+.person .tag{
+  display:inline-block;font-size:0.6rem;font-family:'Courier New',monospace;letter-spacing:0.1em;
+  padding:0.15rem 0.5rem;border-radius:3px;margin-top:0.4rem;text-transform:uppercase;
+}
+.tag.found{background:rgba(31,107,79,0.15);color:var(--green);}
+.tag.sealed{background:rgba(140,47,57,0.12);color:var(--red);}
+.tag.secret{background:rgba(91,75,138,0.12);color:var(--purple);}
+.connector{
+  text-align:center;font-family:'Courier New',monospace;color:var(--gold);
+  font-size:0.9rem;letter-spacing:0.3em;margin:0.3rem 0;
+}
+.notes{
+  background:rgba(46,95,163,0.06);border-left:4px solid var(--avo);border-radius:4px;
+  padding:1.2rem 1.4rem;margin:2rem 0;font-size:0.9rem;
+}
+.notes b{color:var(--navy);}
+.footer{text-align:center;padding:2rem;font-family:'Courier New',monospace;font-size:0.7rem;letter-spacing:0.2em;color:var(--grey);text-transform:uppercase;}
+/* modal */
+.modal-backdrop{position:fixed;inset:0;background:rgba(10,16,30,0.75);z-index:200;display:none;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(3px);}
+.modal-backdrop.show{display:flex;}
+.modal{background:var(--paper);max-width:560px;width:100%;max-height:85vh;overflow-y:auto;border-radius:8px;padding:2rem;position:relative;border:1px solid rgba(31,56,100,0.3);box-shadow:0 20px 60px rgba(0,0,0,0.4);}
+.modal .close{position:absolute;top:0.8rem;right:1rem;background:none;border:none;font-size:1.6rem;cursor:pointer;color:var(--navy);line-height:1;}
+.modal h3{font-size:1.4rem;color:var(--navy);margin-bottom:0.3rem;}
+.modal .m-role{font-family:'Courier New',monospace;font-size:0.7rem;letter-spacing:0.2em;color:var(--gold);text-transform:uppercase;margin-bottom:1rem;}
+.modal p{font-size:0.95rem;margin-bottom:0.7rem;color:#3A352E;}
+.modal .m-quote{font-style:italic;color:var(--red);border-left:3px solid var(--red);padding:0.5rem 1rem;margin:1rem 0;font-size:0.95rem;}
+@media(max-width:700px){.tree{padding:2rem 1rem 3rem;}.person{min-width:120px;}}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>The Ali-Nel Family Tree</h1>
+  <div class="sub">Six Generations · One Current</div>
+  <div class="line">Comores → Moçambique → South Africa → Portugal</div>
+</div>
+
+<div class="tree">
+
+  <div style="text-align:center;margin-bottom:2rem;">
+    <a href="index.html" style="display:inline-block;background:var(--navy);color:var(--light);padding:0.7rem 1.6rem;border-radius:4px;text-decoration:none;font-family:'Courier New',monospace;font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;border:1px solid var(--gold);margin:0 0.4rem;">← The Passport</a>
+    <a href="story.html" style="display:inline-block;background:var(--gold);color:var(--navy);padding:0.7rem 1.6rem;border-radius:4px;text-decoration:none;font-family:'Courier New',monospace;font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;border:1px solid var(--gold);font-weight:bold;margin:0 0.4rem;">Read the Story →</a>
+  </div>
+
+  <!-- G1 -->
+  <div class="gen">
+    <div class="gen-label">Generation 1 · Comoros</div>
+    <div class="gen-sub">The Islands — the beginning of the line</div>
+    <div class="people">
+      <div class="person deceased" onclick="openPerson('madimbamba')">
+        <div class="name">Ali Madimbamba</div>
+        <div class="role">Grandfather</div>
+        <div class="dates">Mbadjé region</div>
+        <span class="tag sealed">Comoros</span>
+      </div>
+      <div class="person deceased" onclick="openPerson('amina')">
+        <div class="name">Amina Adarafina</div>
+        <div class="role">Grandmother</div>
+        <div class="dates">Mbadjé region</div>
+        <span class="tag sealed">Comoros</span>
+      </div>
+    </div>
+    <div class="connector">│ │</div>
+    <div class="people" style="justify-content:center;">
+      <div class="person deceased" onclick="openPerson('mohammed')" style="min-width:130px;">
+        <div class="name">Mohammed</div>
+        <div class="role">Brother</div>
+      </div>
+      <div class="person deceased" onclick="openPerson('yusufhajee')" style="min-width:170px;">
+        <div class="name">Yusuf Hajee Aboobaker</div>
+        <div class="role">Cousin</div>
+        <div class="dates">Marquette · Musket · Oman</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- G2 -->
+  <div class="gen">
+    <div class="gen-label">Generation 2 · The Crossing</div>
+    <div class="gen-sub">Comoros → Mozambique → Johannesburg · swept in by gold, stamped out by empire</div>
+    <div class="people">
+      <div class="person deceased" onclick="openPerson('muskien')" style="min-width:200px;">
+        <div class="name">Muskien Muze Ali</div>
+        <div class="role">The Father · the displaced worker</div>
+        <div class="dates">migrated 1930s–40s · deported ≈1966/67 · d. Maputo</div>
+        <span class="tag sealed">The Stamp</span>
+      </div>
+    </div>
+    <div class="connector">⚭</div>
+    <div class="people">
+      <div class="person deceased hero" onclick="openPerson('alice')" style="min-width:200px;">
+        <div class="name">Alice Nel</div>
+        <div class="role">The Mother · the Keeper · 5 languages</div>
+        <div class="dates">b. 5 Sept 1921 · Somerset East · ALI-NEL</div>
+        <span class="tag found">The Hero</span>
+      </div>
+    </div>
+    <div class="connector">│ (his siblings)</div>
+    <div class="people">
+      <div class="person deceased" onclick="openPerson('abiba')" style="min-width:150px;">
+        <div class="name">Abiba</div>
+        <div class="role">Sister · raised Laura</div>
+        <div class="dates">Maputo</div>
+        <span class="tag secret">The Keeper of the Key</span>
+      </div>
+      <div class="person deceased" onclick="openPerson('isha')" style="min-width:120px;">
+        <div class="name">Isha</div>
+        <div class="role">Sister</div>
+      </div>
+      <div class="person deceased" onclick="openPerson('brother2')" style="min-width:130px;">
+        <div class="name">(brother)</div>
+        <div class="role">Name unknown</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- G3 -->
+  <div class="gen">
+    <div class="gen-label">Generation 3 · The Seven &amp; The Last-Born</div>
+    <div class="gen-sub">Sophiatown freehold → Western Native Township → Westbury · the family the state kept renaming</div>
+    <div class="people">
+      <div class="person deceased" onclick="openPerson('abdul')">
+        <div class="name">Abdul</div>
+        <div class="role">Eldest · Maputo</div>
+        <div class="dates">wife Cadija · 24 de Julho</div>
+        <span class="tag sealed">The Stranded</span>
+      </div>
+      <div class="person deceased" onclick="openPerson('unusse')">
+        <div class="name">Unusse</div>
+        <div class="role">Brother · Maputo</div>
+        <span class="tag sealed">The Stranded</span>
+      </div>
+      <div class="person deceased" onclick="openPerson('sully')">
+        <div class="name">Sully (Sulayman)</div>
+        <div class="role">Brother · "Sullymanl" 15 Oct 1949</div>
+        <div class="dates">wife Jennifer · sons Kervin &amp; Keenan</div>
+        <span class="tag sealed">W.N.T.</span>
+      </div>
+      <div class="person deceased" onclick="openPerson('rashid')">
+        <div class="name">Rashid</div>
+        <div class="role">The Systems Analyst</div>
+        <div class="dates">b. 1 Dec 1954 · d. ≈1987–88 at 33</div>
+        <span class="tag sealed">The Wound</span>
+      </div>
+      <div class="person deceased" onclick="openPerson('philip')">
+        <div class="name">Philip</div>
+        <div class="role">Brother</div>
+        <span class="tag sealed">Sealed</span>
+      </div>
+      <div class="person living hero" onclick="openPerson('hamedetree')">
+        <div class="name">Hamede</div>
+        <div class="role">The One Who Got Out · b. 1958</div>
+        <div class="dates">Cape Town · 45+ years</div>
+        <span class="flag">🦞</span>
+        <span class="tag found">The Narrator</span>
+      </div>
+      <div class="person deceased" onclick="openPerson('aboobaker')">
+        <div class="name">Aboobaker</div>
+        <div class="role">The Kneeling Man</div>
+        <div class="dates">b. 1960</div>
+        <span class="tag sealed">Sealed</span>
+      </div>
+    </div>
+    <div class="connector">┃ the secret twin — the true last-born</div>
+    <div class="people">
+      <div class="person deceased" onclick="openPerson('faizeltree')">
+        <div class="name">Faizel</div>
+        <div class="role">Twin of Laura · O Gémeo</div>
+        <div class="dates">d. ≈1964 · 7 months · meningitis</div>
+        <span class="tag secret">The Lost Twin</span>
+      </div>
+      <div class="person living" onclick="openPerson('lauratree')">
+        <div class="name">Laura</div>
+        <div class="role">The Surviving Twin · found ~2011</div>
+        <div class="dates">b. 9 Jan 1964 · Maputo → Portugal</div>
+        <span class="tag found">A Sobrevivente</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- G4 -->
+  <div class="gen">
+    <div class="gen-label">Generation 4 · The Getting Out</div>
+    <div class="gen-sub">Ennerdale → Cape Town 1990 · "Every decision I made was to give them a better chance."</div>
+    <div class="people">
+      <div class="person living hero" onclick="openPerson('hamedetree')">
+        <div class="name">Hamede</div>
+        <div class="role">Mobil → Engen · 1980–2003</div>
+        <div class="dates">b. 1958</div>
+      </div>
+      <div class="person deceased" onclick="openPerson('ann')">
+        <div class="name">Ann Elizabeth</div>
+        <div class="role">The Bride · married at 21</div>
+        <div class="dates">≈1979</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- G5 -->
+  <div class="gen">
+    <div class="gen-label">Generation 5 · The Sons</div>
+    <div class="gen-sub">"This is for them, not about them." Their lives are their own.</div>
+    <div class="people">
+      <div class="person living" onclick="openPerson('ryan')">
+        <div class="name">Ryan Jared Ali</div>
+        <div class="role">Cape Town</div>
+        <span class="tag found">For Them</span>
+      </div>
+      <div class="person living" onclick="openPerson('warren')">
+        <div class="name">Warren Ansley Ali</div>
+        <div class="role">Hackney · London</div>
+        <span class="tag found">For Them</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- G6 -->
+  <div class="gen" style="border:2px solid var(--gold);">
+    <div class="gen-label" style="color:var(--gold);">Generation 6 · The Future</div>
+    <div class="gen-sub">The name carried forward — this is for her</div>
+    <div class="people">
+      <div class="person living hero" onclick="openPerson('sullytree')" style="min-width:160px;">
+        <div class="name">Sully</div>
+        <div class="role">Granddaughter · named after Sulayman</div>
+        <span class="tag found">The Future</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="notes">
+    <b>The three-way split:</b> the deportation of Muskien ≈1966/67 tore the family across three countries — father + Abdul + Unusse + Abiba (+ later Laura) in Maputo; mother with the younger children in Johannesburg (Sophiatown → W.N.T. → Westbury); Laura carried to Maputo as Abiba's child, then to Portugal. The brothers were trapped in Mozambique until the Carnation Revolution (1974) freed them (independence 25 June 1975). <b>Of the seven, only Hamede and Laura are living.</b>
+  </div>
+
+  <div class="notes" style="border-left-color:var(--gold);">
+    <b>The crew (W.N.T. friends):</b> <b>Georgie Jones</b> — 616 Kanyile St neighbour, friend to this day, still alive. <b>Phillip Winnaar</b> — best man at the wedding, jail → Jehovah's Witness, d. ≈2022–23; his transformation began with a forgotten letter Hamede wrote him from Ennerdale. "It would be a grave error to mention my past without mentioning Georgie." — Hamede
+  </div>
+
+  <div class="notes" style="border-left-color:var(--red);">
+    <b>The Nels (mother's family):</b> white in appearance, classified "coloured" by apartheid — "racist wannabes" performing provisional whiteness. Siblings at the same station would not greet each other. "That is what apartheid did — it twisted and altered a person's identity." Grandmother: Olive. Two cousins took their own lives. Jennifer (Sully's wife) looked white and worked as a white hairdressing specialist.
+  </div>
+</div>
+
+<div class="footer">The Ali-Nel Family Tree · The Passport Project · for Ryan, Warren &amp; Sully</div>
+
+<!-- MODAL -->
+<div class="modal-backdrop" id="modalBackdrop" onclick="closeModal(event)">
+  <div class="modal" id="modalContent"></div>
+</div>
+
+<script>
+const PEOPLE = {
+  madimbamba:{n:"Ali Madimbamba",r:"Grandfather · Comoros",d:"Mbadjé region",t:"The beginning of the line. From the Comoros Islands, his family's story crosses the Mozambique Channel — the sea that would carry his son to the goldfields.",q:null},
+  amina:{n:"Amina Adarafina",r:"Grandmother · Comoros",d:"Mbadjé region",t:"Wife of Ali Madimbamba. The matriarch of the Comoros generation.",q:null},
+  mohammed:{n:"Mohammed Madimbamba",r:"Brother of Ali",d:"",t:"Part of the Comoros generation — namesake of the Madimbamba line.",q:null},
+  yusufhajee:{n:"Yusuf Hajee Aboobaker",r:"Cousin",d:"Grandparents from Marquette · Musket · Oman",t:"The wider family reached across the Indian Ocean — Oman, Marquette, Musket. His children: Yusuf Hajee and Zaida Hajee.",q:null},
+  muskien:{n:"Muskien Muze Ali",r:"The Father · the displaced worker",d:"migrated 1930s–40s · deported ≈1966/67 · d. Maputo",t:"Swept into Johannesburg by the gold economy, married Alice Nel, built a freehold life on Good Street, Sophiatown. Watched Salazar's Portugal on the radio, waiting for the empire that ruled his homeland to fall. Arrested as an 'illegal immigrant' ≈1966/67 — after Laura's birth — and deported to Mozambique. Never returned. Died in exile in Maputo.",q:"\"The only thing he taught me is not be like him.\" — Hamede"},
+  alice:{n:"Alice Nel",r:"The Mother · the Keeper",d:"b. 5 Sept 1921 · Somerset East · ALI-NEL",t:"Five languages. A French passport — nationality FRANÇAISE — domicile 142 Good Street. Her family, the Nels, looked white but were classified 'coloured'. She held the family together through the deportation, the removals, the Westbury years. She is the true protagonist of this story — Hamede's hero.",q:"\"My mother, my inspiration, my Hero.\" — Hamede"},
+  abiba:{n:"Abiba",r:"Sister of Muskien · A Tia que Criou",d:"Maputo",t:"Raised Laura in Maputo as her own adopted child. Visited Johannesburg after Faizel's death (≈late 1964) and took the surviving baby — the handover 'without us knowing, only the adults.' On Hamede's first visit to Abdul in Maputo, Abiba showed him the photograph of the little girl who looked exactly like his mother: Laura. She was the keeper of the secret — then the keeper of the key.",q:null},
+  isha:{n:"Isha",r:"Sister of Muskien",d:"",t:"Sister of the father — part of the Maputo generation.",q:null},
+  brother2:{n:"(brother)",r:"Name unknown",d:"",t:"A brother of the father — name to be recovered. One of the open questions of the project.",q:null},
+  abdul:{n:"Abdul",r:"Eldest son",d:"wife Cadija · 24 de Julho · Maputo",t:"The eldest. Trapped in Maputo by the deportation's aftermath — could not return to South Africa. Freed by the Carnation Revolution (1974). Hamede's first visit to Abdul in Maputo is where the discovery of Laura began.",q:null},
+  unusse:{n:"Unusse (Younnis)",r:"Son",d:"Maputo",t:"With Abiba in Maputo, locked in Mozambique by the deportation's aftermath. Freed when Portugal's empire collapsed in 1975.",q:null},
+  sully:{n:"Sully (Sulayman)",r:"Son",d:"'Sullymanl' 15 Oct 1949 · wife Jennifer · sons Kervin & Keenan",t:"Photographed with Kervin in Western, just outside the family house. Jennifer, his wife, looked white and worked as a white hairdressing specialist — passing at work. His name lives on in the granddaughter, Sully.",q:null},
+  rashid:{n:"Rashid",r:"The Systems Analyst",d:"b. 1 Dec 1954 · d. ≈1987–88 at 33",t:"Hamede's role model — great soccer player, one of the few black systems analysts in the computer industry under apartheid, earning well. 'But he could not shake the bad habits.' Three years of silence after the Ennerdale fight; reconciled when Hamede moved in a few streets away. At 33, died in a head-on collision at 2:00 am, driving home drunk. Far left in the wedding party photo; his son in Aboobaker's arms.",q:"\"That was a great shock and further motivation to get out of Jhb.\" — Hamede"},
+  philip:{n:"Philip",r:"Son",d:"",t:"One of the seven. His story is sealed — per Hamede, the dates and circumstances are private family record. Of the seven children, only Hamede and Laura are living.",q:null},
+  hamedetree:{n:"Hamede",r:"The Narrator · The One Who Got Out",d:"b. 1958 · Cape Town",t:"Born 1958. Dowling Street Primary → Bosmont High (graduated 17). Married Ann Elizabeth at 21. First house in Ennerdale — bittersweet, involving Rashid and their mother's intervention. Transferred to Cape Town 1990, the year Mandela walked free. Mobil → Engen, 1980–2003. Left Johannesburg to escape the gangster-infested townships. Found his sister Laura ~2011. The last remaining child of Muskien Muze Ali — and with Laura, the living line.",q:"\"My story is not unique — but too common to ignore the patterns.\" — Hamede"},
+  aboobaker:{n:"Aboobaker",r:"The Kneeling Man",d:"b. 1960",t:"The kneeling man holding Rashid's son in the wedding party photo. His passing is sealed family record — left in a government mortuary, per Hamede: 'the dates they passed were traumatic... it was all due to poor choices.' Treated with love, not judgment.",q:null},
+  faizeltree:{n:"Faizel",r:"Twin of Laura · O Gémeo",d:"d. ≈1964 · 7 months · meningitis",t:"Laura's twin brother. Died at seven months of meningitis — the sadness Hamede remembers from the house. One twin lost to illness, the other carried to Maputo — the mother's double loss in a single year. The 2013 family tree never named him.",q:null},
+  lauratree:{n:"Laura",r:"The Surviving Twin · found ~2011",d:"b. 9 Jan 1964 · Maputo → Portugal",t:"The true last-born — a surviving twin. Given to Aunt Abiba (handover ≈late 1964), raised in Maputo as her own child, never told she had a family in South Africa. The father knew her — photographed with her — but she never knew he was her father. By the time Hamede found her, she had left for Portugal with her ex-husband. The secret travelled with her across the sea. When the pieces came together, her response was gratitude and love.",q:"\"Thanks for finding me, Mano — amo te.\" — Laura"},
+  ann:{n:"Ann Elizabeth",r:"The Bride",d:"married ≈1979",t:"Married Hamede at 21. The wedding photo shows her with the mother, Alice Nel, on the far right — the beginning of the getting out.",q:null},
+  ryan:{n:"Ryan Jared Ali",r:"Son",d:"Cape Town",t:"Hamede's son. This material is for him, not about him — the context of where he comes from.",q:null},
+  warren:{n:"Warren Ansley Ali",r:"Son",d:"Hackney · London",t:"Hamede's son. This material is for him, not about him. The line continues across the sea — as it always has.",q:null},
+  sullytree:{n:"Sully",r:"Granddaughter",d:"named after Sulayman",t:"The future. Named after Sully (Sulayman) — the name carried forward. She needs to know where she comes from. This is for her.",q:null}
+};
+function openPerson(key){
+  const p = PEOPLE[key];
+  if(!p) return;
+  document.getElementById('modalContent').innerHTML =
+    '<button class="close" onclick="closeModal(event)">×</button>' +
+    '<h3>'+p.n+'</h3>' +
+    '<div class="m-role">'+p.r+(p.d?' · '+p.d:'')+'</div>' +
+    '<p>'+p.t+'</p>' +
+    (p.q ? '<div class="m-quote">'+p.q+'</div>' : '');
+  document.getElementById('modalBackdrop').classList.add('show');
+}
+function closeModal(e){
+  if(e && e.target.id === 'modalContent') return;
+  document.getElementById('modalBackdrop').classList.remove('show');
+}
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); });
+</script>
+</body>
+</html>
