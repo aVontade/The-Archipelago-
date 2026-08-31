@@ -36,6 +36,21 @@ Then on GitHub: **Settings → Pages → Deploy from a branch → `main` → `/ 
 Your site will be live at:
 `https://YOUR-USERNAME.github.io/REPO-NAME/`
 
+## 🌐 LIVE
+
+This bundle is published at:
+
+**https://aVontade.github.io/The-Archipelago-/**
+
+To update the live site after any change:
+```bash
+git add -A && git commit -m "update"
+git push origin main
+# GitHub Pages rebuilds automatically in ~1 minute
+```
+
+(The git remote is already configured: `git@github-archipelago:aVontade/The-Archipelago-.git`)
+
 ## 🗂️ The three pages
 
 - `index.html` → the landing (The Passport)
