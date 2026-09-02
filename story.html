@@ -106,8 +106,9 @@ body{
 .pull .who{display:block;font-family:'Courier New',monospace;font-size:0.62rem;letter-spacing:0.25em;color:var(--grey);text-transform:uppercase;font-style:normal;margin-top:0.6rem;}
 /* heirloom plates */
 .plate{max-width:620px;margin:2.2rem auto;}
+/* ---- base frame (default look) ---- */
 .plate .frame{
-  background:#FFFFFF;padding:18px 18px 12px;
+  background:#FFFFFF;padding:14px 14px 10px;
   border:1px solid #CFC6AE;
   box-shadow:0 10px 34px rgba(0,0,0,0.28), inset 0 0 0 1px rgba(255,255,255,0.6);
   position:relative;
@@ -115,13 +116,87 @@ body{
 .plate .frame::before{content:'';position:absolute;inset:7px;border:1px solid rgba(201,162,39,0.55);pointer-events:none;}
 .plate .imgbox{overflow:hidden;background:#FFFFFF;}
 .plate .imgbox img{display:block;width:100%;height:auto;transform:scale(1.04);filter:sepia(0.10) contrast(1.02) saturate(0.98);}
-.plate:nth-of-type(odd) .frame{transform:rotate(-0.5deg);}
-.plate:nth-of-type(even) .frame{transform:rotate(0.4deg);}
 .plate .cap{
   text-align:center;font-family:'Courier New',monospace;font-size:0.62rem;letter-spacing:0.2em;
   color:var(--grey);text-transform:uppercase;padding:0.8rem 0.5rem 0.2rem;
 }
 .plate .cap b{color:var(--navy);letter-spacing:0.24em;}
+
+/* ============ TREATMENT SYSTEM ============ */
+/* Each plate gets a material surface behind it (album page / desk / dark field) */
+.plate{position:relative;}
+.plate::before{
+  content:'';position:absolute;inset:-12px -14px;border-radius:3px;z-index:0;pointer-events:none;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.015) 2px,rgba(0,0,0,0.015) 3px);
+}
+.plate .frame,.plate .cap{position:relative;z-index:1;}
+
+/* ---- PHOTO: album page + corner mounts ---- */
+.plate.photo::before{background:linear-gradient(160deg,#eee5cf,#ddcfa9);box-shadow:0 14px 44px rgba(60,40,10,0.30);}
+.plate.photo .frame{
+  background:#fdfdfb;padding:10px 10px 32px;
+  border:1px solid #d9d2bd;
+  box-shadow:0 1px 3px rgba(0,0,0,0.20),0 12px 30px rgba(0,0,0,0.22);
+}
+.plate.photo .frame::before{display:none;}
+.plate.photo .imgbox{background:#fff;padding:3px;}
+.plate.photo .imgbox img{filter:saturate(0.92) contrast(1.02);transform:none;box-shadow:0 1px 2px rgba(0,0,0,0.15);}
+.plate.photo .cap{color:#7d6f52;letter-spacing:0.16em;padding-top:0.55rem;}
+.plate.photo .cap b{color:#4d4028;}
+.plate.photo .frame::after{content:'';position:absolute;inset:auto 18px 9px;height:1px;background:linear-gradient(90deg,transparent,rgba(138,127,106,0.35),transparent);}
+
+/* ---- DOC: archival desk + clip ---- */
+.plate.doc{max-width:560px;}
+.plate.doc::before{background:linear-gradient(180deg,#4a3f30,#2b2419);box-shadow:0 18px 50px rgba(0,0,0,0.45);inset:-10px -12px;border-radius:4px;}
+.plate.doc .frame{
+  background:#f6f2e8;padding:16px;
+  border:1px solid #c8bfa8;
+  box-shadow:0 2px 4px rgba(0,0,0,0.5),0 14px 34px rgba(0,0,0,0.4);
+}
+.plate.doc .frame::before{display:none;}
+.plate.doc .frame::after{content:'';position:absolute;top:-9px;left:50%;transform:translateX(-50%);width:30px;height:20px;background:linear-gradient(180deg,#9aa0ab,#646a76);border-radius:3px 3px 0 0;box-shadow:0 2px 4px rgba(0,0,0,0.45);}
+.plate.doc .imgbox{background:#f6f2e8;padding:2px;}
+.plate.doc .imgbox img{filter:contrast(1.03) sepia(0.06);transform:none;}
+.plate.doc .cap{color:#c9c2b2;padding-top:1rem;}
+.plate.doc .cap b{color:#e8dfc8;}
+
+/* ---- COLLAGE: frameless on dark ---- */
+.plate.collage{max-width:660px;}
+.plate.collage::before{background:radial-gradient(ellipse at center,#2e2b27,#141210 82%);box-shadow:0 20px 60px rgba(0,0,0,0.5);inset:-4px;border-radius:2px;}
+.plate.collage .frame{background:transparent;padding:0;border:none;box-shadow:none;}
+.plate.collage .frame::before,.plate.collage .frame::after{display:none;}
+.plate.collage .imgbox{background:transparent;box-shadow:0 0 70px rgba(0,0,0,0.6);}
+.plate.collage .imgbox img{filter:none;transform:none;}
+.plate.collage .cap{color:#8f8874;padding-top:1.2rem;}
+.plate.collage .cap b{color:#c9a227;}
+
+/* ---- PHOTO-ALT: casual colour snapshot (FB, polaroid-leaning) ---- */
+.plate.photo-alt::before{background:linear-gradient(200deg,#f4ecda,#d9cba9);box-shadow:0 14px 44px rgba(60,40,10,0.26);}
+.plate.photo-alt .frame{background:#fff;padding:8px 8px 30px;box-shadow:0 1px 3px rgba(0,0,0,0.2),0 12px 28px rgba(0,0,0,0.22);}
+.plate.photo-alt .frame::before{display:none;}
+.plate.photo-alt .frame::after{content:'';position:absolute;inset:auto 12px 7px;height:1px;background:linear-gradient(90deg,transparent,rgba(138,127,106,0.3),transparent);}
+.plate.photo-alt .imgbox{background:#fff;}
+.plate.photo-alt .imgbox img{filter:saturate(0.95);transform:none;}
+.plate.photo-alt .cap{color:#6d5f41;letter-spacing:0.14em;}
+.plate.photo-alt .cap b{color:#4d4028;}
+
+/* ---- GROUP: several documents on one desk (the passport set) ---- */
+.plate.group{max-width:660px;}
+.plate.group::before{background:linear-gradient(180deg,#4a3f30,#2b2419);box-shadow:0 18px 50px rgba(0,0,0,0.45);inset:-10px -12px;border-radius:4px;}
+.plate.group .frame{background:#f6f2e8;padding:14px;border:1px solid #c8bfa8;box-shadow:0 2px 4px rgba(0,0,0,0.5),0 14px 34px rgba(0,0,0,0.35);}
+.plate.group .frame::before,.plate.group .frame::after{display:none;}
+.plate.group .row{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;align-items:flex-start;}
+.plate.group .row img{flex:1;min-width:170px;max-width:250px;height:auto;background:#fff;padding:5px;border:1px solid #d8d0ba;box-shadow:0 1px 4px rgba(0,0,0,0.3);}
+.plate.group .cap{color:#c9c2b2;padding-top:1rem;}
+.plate.group .cap b{color:#e8dfc8;}
+
+/* tilt balance: docs/collage/group sit straight, photos keep a gentle life */
+.plate.doc .frame,.plate.collage .frame,.plate.group .frame{transform:none !important;}
+.plate.photo:nth-of-type(odd) .frame{transform:rotate(-0.7deg);}
+.plate.photo:nth-of-type(even) .frame{transform:rotate(0.6deg);}
+.plate.photo-alt .frame{transform:rotate(0.9deg) !important;}
+.plate.collage{transform:none;}
+
 /* audio artifact */
 .audio-box{max-width:520px;margin:1.6rem auto;background:var(--cream);border:1px solid #CFC6AE;padding:0.9rem 1.1rem;box-shadow:0 6px 20px rgba(0,0,0,0.12);}
 .audio-box .at{font-family:'Courier New',monospace;font-size:0.6rem;letter-spacing:0.25em;color:var(--gold);text-transform:uppercase;margin-bottom:0.5rem;text-align:center;}
@@ -213,7 +288,7 @@ body{
     <h2>Three faces. This is the story of how they found each other.</h2>
     <div class="era">Look at them now — before you know their names · by the end of this book, you will know every face in this picture</div>
     <p class="lede">This is the photograph that started the healing — the picture from Aunt Abiba's house in Maputo, where Hamede first saw his mother in his sister's face. Keep it with you as you read. Every chapter that follows is the answer to the question this picture asks.</p>
-    <div class="plate">
+    <div class="plate collage">
       <div class="frame"><div class="imgbox"><img src="assets/laura_alice_warren_collage_2026-09-01.jpg" alt="The photograph from Maputo — Laura, young; Alice holding a baby; Alice's French passport photograph"></div></div>
       <div class="cap"><b>Plate VIII</b> · The Collage — the discovery photograph from Maputo · the picture where Hamede first saw his mother in his sister's face · the three faces the whole story carries: Laura (left) · Alice holding her grandson Warren (centre) · Alice's French passport photograph (right)</div>
     </div>
@@ -282,7 +357,7 @@ body{
     <p>Sophiatown was the intellectual and musical fire of black Johannesburg — the "Western Areas" that the authorities could not stand. Good Street was its sensory heart: the <b>Street of Shebeens</b>, a place of jazz and defiance. At number 39 steps stood Fatty Phyllis Peterson's shebeen. Nearby, the writer Can Themba held court at his "House of Truth." Writers, musicians, boxers, priests and gangsters all breathed the same smoky air.</p>
     <p>The Ali family home was <b>142 Good Street</b> — freehold. Owned. In a country where black families were being systematically denied the right to own the ground they stood on, Muskien Muze Ali stood on his own title deed.</p>
     <p>And there, a confluence: the love story between Muskien and <b>Alice Nel</b> — a brilliant local woman, a polyglot who spoke five languages, a woman people simply loved. She was born on 5 September 1921 in Somerset East, in the Cape. Her marriage to a French citizen gave her a French passport — the document that would later become the family's most precious artifact: <i>ALI-NEL, nationalité française, domicile: 142 Good Street.</i></p>
-    <div class="plate">
+    <div class="plate doc">
       <div class="frame"><div class="imgbox"><img src="assets/mothers_passport_identity_page_2026-08-30.jpg" alt="Alice Nel's French passport — identity page"></div></div>
       <div class="cap"><b>Plate I</b> · The artifact that opened the whole story — Alice's French passport: ALI-NEL, française, domicile 142 Good Street</div>
     </div>
@@ -298,7 +373,7 @@ body{
     <p>Apartheid did not only rupture the Ali family physically. It twisted Alice's family — the <b>Nels</b> — psychologically.</p>
     <p>The Nels were white in appearance. But the state classified them <b>"coloured."</b> The bitterness that grew in that household came from a terrible in-between: they could pass for white — and so they performed whiteness, desperately. "If you look white you can get privilege — as long as nobody asked proof."</p>
     <p>The pressure to pass created a deep contempt for Alice's black husband. A boy in that family grew up feeling like an embarrassment for being black — and made his peace with it long ago, the way you make peace with a wound that finally healed. Alice's sister <b>Julia</b> — the sister Alice loved dearly — married a man the machine broke. He parked his car behind a convent and gassed himself to death; the family never recovered from finding him. Years later, a cousin and his girlfriend did the same, out of despair, in a car. "They had many tragedies."</p>
-    <div class="plate">
+    <div class="plate photo">
       <div class="frame"><div class="imgbox"><img src="assets/julia_and_husband_beach_2026-09-02.jpg" alt="Julia and her husband on the beach — young, before the tragedy"></div></div>
       <div class="cap"><b>Plate X</b> · Julia and her husband — young, on the beach, before the machine broke him · the sister Alice loved dearly</div>
     </div>
@@ -349,7 +424,7 @@ body{
     <p>In January 1964, Alice gave birth to twins. The boy, <b>Faizel</b>, died at seven months of meningitis. The girl, <b>Laura</b>, survived.</p>
     <p>Alice was grieving, poor, with an unreliable husband. When Muskien's sister <b>Abiba</b> visited Johannesburg — shortly after Faizel's death — a secret arrangement was made: the baby would go to Maputo, to be raised by Abiba as her own child. The handover happened <b>"without us knowing, only the adults."</b> The children in the house did not know that the baby who left with Aunt Abiba was their sister.</p>
     <p>The same year, Alice's French passport was renewed — 7 April 1964, at the French Consulate in Johannesburg, valid until 6 April 1967. Look at those dates: the passport brackets <b>everything</b> — Laura's birth, Faizel's death, the handover, and the deportation that would come before the passport expired.</p>
-    <div class="plate">
+    <div class="plate doc">
       <div class="frame"><div class="imgbox"><img src="assets/mothers_passport_renewal_page_2026-08-30.jpg" alt="Alice Nel's passport — renewal page 1964–1967"></div></div>
       <div class="cap"><b>Plate II</b> · The renewal page — issued 13 Nov 1958, renewed 7 Apr 1964 → 6 Apr 1967 · French Consulate, Johannesburg</div>
     </div>
@@ -386,7 +461,7 @@ body{
     <p>Hamede, born in 1958, was eight or nine years old. In his own 2013 notes he wrote "about 8–10 years — the best I could do." The man who had been a lawful freehold owner on Good Street, the man who had built a home and a community, was to the state a <b>foreign native</b> — deportable by definition.</p>
     <p>He never returned. He died in exile, in Maputo.</p>
     <p>The father was not a favourite man to his son — the boy would later say the only thing his father taught him was <i>not to be like him</i>. But the pattern of what happened to him is not personal. It is structural. The gold economy had pulled him in; the identity machine stamped him out. And the passport page that recorded the family the state counted — that document — survives, as evidence of who they were.</p>
-    <div class="plate">
+    <div class="plate doc">
       <div class="frame"><div class="imgbox"><img src="assets/mothers_passport_signalement_page_2026-08-30.jpg" alt="Alice Nel's passport — signalement page with the children's table, and the photograph page with her signature"></div></div>
       <div class="cap"><b>Plate III</b> · The passport spread — the signalement: 1m 56, eyes marron, hair noir · "Accompagné de quatre enfants" — five listed, one by one: Suliman 1949 · Abdool Razack 1951 · Rachid 1954 · Hamadi 1958 · Aboobaker 1960 · and the photograph page — the bearer, two of her boys in suits, and her signature</div>
     </div>
@@ -403,7 +478,7 @@ body{
     <p>They were freed by economics. Britain could no longer finance colonialism; Portugal's empire collapsed — the Carnation Revolution, 25 April 1974; Mozambique's independence, 25 June 1975. The borders opened. The brothers could move again.</p>
     <p>But their father, who had watched the Portuguese news with such anxious attention, died in exile before he could see it.</p>
     <p>Abdul married <b>Gadija</b> (Cadija), and the register was signed in Maputo. There is a photograph of that day, and it is the family in miniature: Gadija leaning over the table, pen in hand, signing; Abdul beside her in his suit, watching the document; and behind them, <b>Alice</b> — the mother — in a white blouse, the only white face in the room, present for her eldest son's wedding though the border had kept them apart for so long.</p>
-    <div class="plate">
+    <div class="plate photo">
       <div class="frame"><div class="imgbox"><img src="assets/abdul_wedding_register_2026-09-02.jpg" alt="Abdul's wedding in Maputo — Gadija signing the register, Abdul on the right, Alice behind them"></div></div>
       <div class="cap"><b>Plate IX</b> · Abdul's wedding, Maputo — Gadija signing the register · Abdul on the right · Alice behind them, the only white face in the room</div>
     </div>
@@ -451,7 +526,7 @@ body{
     <p>And then there was <b>Phillip Winnaar</b> — part of the crew, and the man who would stand beside Hamede at his wedding. Phillip's own story was a redemption arc written in the open: he was a gangster in South Africa, ran with the violence of the township, went to prison. And he came out changed — drawn to Jehovah's Witnesses, and to the truth Hamede himself would find.</p>
     <p>Phillip's story was told in his own words in <i>Awake!</i> magazine (July 2011, p. 25): <i>"Philip was a gangster in South Africa... Jehovah saw something good in me and drew me to his people, this wonderful brotherhood."</i></p>
     <p>From Ennerdale, Hamede wrote Phillip a letter about the truth he had found — and forgot about it. Years later, Phillip told him: <b>"That letter you wrote me made a big impact in my life."</b> A forgotten letter changed a life. The two men preached together in Klipspruit, where former gangsters greeted Phillip with respect; Hamede helped build the Kingdom Hall in Ennerdale — "this is where I got the truth."</p>
-    <div class="plate">
+    <div class="plate photo">
       <div class="frame"><div class="imgbox"><img src="assets/phillip_eulogy_image1.jpg" alt="Phillip Winnaar — from the eulogy"></div></div>
       <div class="cap"><b>Plate IV</b> · Phillip Winnaar — best man · brother · the redeemed one</div>
     </div>
@@ -481,7 +556,7 @@ body{
     <p>At twenty-one — around 1979 — Hamede married <b>Ann Elizabeth</b>. The black-and-white wedding photograph shows the groom, the bride, and the mother on the far right: the same ALI-NEL from the French passport, present at her son's wedding.</p>
     <p>The wedding party photograph shows eight men in suits and a child on the lawn outside a brick building. On the far left: <b>Rashid</b> — the reconciled brother, present in the good years before his death. In the middle, kneeling, holding the child: <b>Aboobaker</b> — the younger brother, the one born in 1960, the last of the passport's list. The child in his arms is <b>Rashid's son</b>. On the far right: the groom himself.</p>
     <p>And among the close friends who stood with him that day — third from the left, with the biggest afro in the row: the best man himself, Phillip Winnaar.</p>
-    <div class="plate">
+    <div class="plate photo">
       <div class="frame"><div class="imgbox"><img src="assets/hamedes_wedding_party_2026-08-30.jpg" alt="The wedding party — Rashid far left, Aboobaker kneeling with Rashid's son, Hamede far right"></div></div>
       <div class="cap"><b>Plate V</b> · The wedding party — Rashid far left · Aboobaker kneeling with Rashid's son · the groom far right · third from the left, with the biggest afro: the best man, Phillip Winnaar</div>
     </div>
@@ -532,7 +607,7 @@ body{
     <p>The girl was <b>Laura</b> — the true last-born, the surviving twin, the baby handed over in 1964.</p>
     <p>The very photograph from that day — the one where he saw his mother in his sister's face — is preserved in this book. You met it on the first page: the collage at the opening, Plate VIII. Here is where that story begins.</p>
     <p>The 2013 family-tree document holds the same image: <b>the father, Muskien Muze Ali, photographed with little Laura in Maputo</b> — the man who knew her, the man who was her father, standing beside a child who never knew he was her father. And beside them, Abiba's photograph.</p>
-    <div class="plate">
+    <div class="plate doc">
       <div class="frame"><div class="imgbox"><img src="assets/family_tree_2013_page_mafalala_father_laura_abiba.jpg" alt="The 2013 family tree page — the father with Laura in Maputo, Abiba's photo"></div></div>
       <div class="cap"><b>Plate VI</b> · From the 2013 family tree — the father with little Laura in Maputo · Mafalala, home of Chissano and Eusébio</div>
     </div>
@@ -550,7 +625,7 @@ body{
     <p>When the pieces were finally put together — the passport, the photograph, the memory of the handover — Hamede reached his sister in Portugal. She has three children — <b>Gani</b>, <b>Terno</b> and <b>Dinis</b>, her only daughter. And her response to being found was not anger, and not grief. It was gratitude and love:</p>
     <div class="pull">"Thanks for finding me, Mano — amo te."<span class="who">Laura — thank you, brother — I love you</span></div>
     <div class="pull">"This is not only my story — it is hers, more than mine."<span class="who">Hamede, on his sister Laura</span></div>
-    <div class="plate">
+    <div class="plate photo-alt">
       <div class="frame"><div class="imgbox"><img src="assets/laura_facebook_post_2026-08-30.jpg" alt="Laura, grown — with her brother Hamede"></div></div>
       <div class="cap"><b>Plate VII</b> · Laura, grown — "even with the age difference she resembles my mom"</div>
     </div>
